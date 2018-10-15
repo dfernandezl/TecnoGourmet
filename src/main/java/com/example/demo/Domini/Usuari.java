@@ -1,19 +1,38 @@
 package com.example.demo.Domini;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class Usuari {
 
+
+    @NotNull
+    @Size(min = 3, message = "Name field must have at least 3 characters")
     private String userName;
+
+
+    @NotNull
+    @Size(min = 3, message = "Password field must have at least 3 characters")
     private String password;
+
+    @NotNull
     private int punts;
+
+
+    @NotNull
     private int reserves_no_presentades;
 
 
-    public Usuari(String usuari,String password){
+    public Usuari(){
 
-        this.userName=usuari;
-        this.password=password;
-        this.punts=0;
-        this.reserves_no_presentades=0;
+    }
+
+    public Usuari(UsuariBuilder ub){
+
+        this.userName=ub.userName;
+        this.password=ub.password;
+        this.punts=ub.punts;
+        this.reserves_no_presentades=ub.reserves_no_presentades;
     }
 
 
@@ -26,14 +45,78 @@ public class Usuari {
     }
 
     public int punts(){
-        return this.punts:
+        return this.punts;
+    }
+
+    public int getReserves_no_presentades(){
+        return this.reserves_no_presentades;
+    }
+
+    public void setUserName(String userName){
+        this.userName=userName;
     }
 
 
+    public void setPassword(String password){
+        this.password=password;
+    }
+
+    public void setPunts(int punts){
+        this.punts=punts;
+    }
+
+    public void setReserves_no_presentades(int reserves_no_presentades){
+        this.reserves_no_presentades=reserves_no_presentades;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuari{" +
+                "UserName='" + this.userName + '\'' +
+                ", password=" + this.password +
+                ", punts='" + this.punts + '\'' +
+                ", reserves no presentades=" + this.reserves_no_presentades +
+                '}';
+    }
 
 
+    public static class UsuariBuilder {
 
 
+        public String userName;
+        public String password;
+        public int punts;
+        public int reserves_no_presentades;
 
+
+        public UsuariBuilder() {
+        }
+
+        public UsuariBuilder userName(String name) {
+            this.userName = name;
+            return this;
+        }
+
+        public UsuariBuilder password(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public UsuariBuilder punts(int punts) {
+            this.punts = punts;
+            return this;
+        }
+
+        public UsuariBuilder reserves_no_presentades(int reserves_no_presentades) {
+            this.reserves_no_presentades = reserves_no_presentades;
+            return this;
+        }
+
+
+        public Usuari build() {
+            return new Usuari(this);
+        }
+
+    }
 
 }
