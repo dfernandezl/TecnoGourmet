@@ -36,7 +36,7 @@ public class UsuariDAO {
 
     public List<Usuari> findAll() {
         //instead of using the rowMapper it uses the BeanPropertyRowMapper to fo it authomatically
-        return jdbcTemplate.query(FIND_ALL, new BeanPropertyRowMapper<>(Usuari.class));
+        return jdbcTemplate.query(FIND_ALL, mapper);
     }
 
 
