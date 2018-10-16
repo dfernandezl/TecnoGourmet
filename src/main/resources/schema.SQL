@@ -17,3 +17,13 @@ CREATE TABLE Reserva(
   FOREIGN KEY (userName) REFERENCES Usuari(userName)
 );
 
+
+DROP TABLE if EXISTS Restaurant;
+CREATE TABLE Restaurant(
+    nom varchar(255) PRIMARY KEY,
+    direccio VARCHAR(255),
+    poblacio VARCHAR(255),
+    puntuacio INT,
+    descripcio varchar(255),
+    telefon INT
+);

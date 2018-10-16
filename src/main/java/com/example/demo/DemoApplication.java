@@ -1,8 +1,10 @@
 package com.example.demo;
 
 import com.example.demo.Domini.Reserva;
+import com.example.demo.Domini.Restaurant;
 import com.example.demo.Domini.Usuari;
 import com.example.demo.UseCases.ReservaUseCases;
+import com.example.demo.UseCases.RestaurantUseCases;
 import com.example.demo.UseCases.UsuariUseCases;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -19,6 +21,8 @@ public class DemoApplication implements CommandLineRunner {
     private ReservaUseCases rsvUseCases;
 
 
+    @Autowired
+    private RestaurantUseCases restUseCases;
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
@@ -54,7 +58,15 @@ public class DemoApplication implements CommandLineRunner {
 
 
 
+        Restaurant rest = new Restaurant.RestaurantBuilder().nomRestaurant("Rest1").direccio("C/Mossen Jaume Urgell").poblacio("Parets").puntuacio(10).descripcio("Molt bo").numTelefon(935621020).build();
 
+
+        restUseCases.insert(rest);
+        System.out.println("RESTAURANT INSERIT");
+
+
+        System.out.println("AQUI TENS TOTS ELS RESTAURANTS:");
+        restUseCases.findAll().forEach(System.out::println);
 
     }
 }
