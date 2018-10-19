@@ -1,6 +1,5 @@
 package com.example.demo.UseCases;
 
-<<<<<<< HEAD
 import com.example.demo.Domini.Restaurant;
 import com.example.demo.Persistence.RestaurantDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,16 +37,4 @@ public class RestaurantUseCases {
     public List<Restaurant> findByPuntuacio(int puntuacio) {
         return restDAO.findByPuntuacio(puntuacio);
     }
-
-=======
-import com.example.demo.Persistence.RestaurantDAO;
-
-public class RestaurantUseCases {
-
-    private RestaurantDAO restDAO;
-
-    public void insertRestaurant(){
-
-    }
->>>>>>> 9b865464573bae6fd5f83d214b39a2846bd4c03f
 }

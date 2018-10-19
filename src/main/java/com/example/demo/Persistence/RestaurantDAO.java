@@ -1,6 +1,6 @@
 package com.example.demo.Persistence;
 
-<<<<<<< HEAD
+
 import com.example.demo.Domini.Restaurant;
 import com.example.demo.Domini.Usuari;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,15 +11,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-=======
-import org.springframework.jdbc.core.JdbcTemplate;
-
->>>>>>> 9b865464573bae6fd5f83d214b39a2846bd4c03f
 public class RestaurantDAO {
 
     private JdbcTemplate jdbcTemplate;
 
-<<<<<<< HEAD
     private final String INSERT = "insert into Restaurant (nom, direccio, poblacio, puntuacio, descripcio, telefon) values(?, ?, ?, ?, ?, ?)";
     private final String FIND_ALL = "select * from Restaurant";
     private final String FIND_BY_RESTAURANT_NAME = "select * from Restaurant where nom = ?";
@@ -74,14 +69,4 @@ public class RestaurantDAO {
         //instead of using the rowMapper it uses the BeanPropertyRowMapper to fo it authomatically
         return jdbcTemplate.query(FIND_BY_PUNTUACIO, new Object[]{puntuacio},mapper);
     }
-=======
-    private final String INSERT_RESTAURANT = "insert into Restaurant (nomRestaurant, direccio, poblacio, puntuacio, descripcio, numTelefon) values(?, ?, ?, ?, ?, ?)";
-    private final String FIND_ALL = "select * from Resturant";
-    private final String FIND_BY_RESTAURANT_NAME = "select * from Restaurant where nomRestaurant = ?";
-    private final String FIND_BY_POBLACIO = "select * from Restaurant where poblacio = ?";
-    private final String FIND_BY_PUNTUACIO = "select * from Restaurant where puntuacio = ?";
-    private final String UPDATE_RESTAURANT = "update Restaurant set nomRestaurant = ?, direccio = ?, poblacio = ?, puntuacio = ?, numTelefon = ?";
-
->>>>>>> 9b865464573bae6fd5f83d214b39a2846bd4c03f
-
 }

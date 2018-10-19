@@ -43,7 +43,6 @@ public class Restaurant {
         return numTelefon;
     }
 
-<<<<<<< HEAD
 
     public String toString(){
         return "nom: "+this.nomRestaurant+", direcció: "+this.direccio+", poblacio: "+ this.poblacio+", puntuacio: "+this.puntuacio+",descripcio: "+this.descripcio+", telefon"+numTelefon;
@@ -92,25 +91,6 @@ public class Restaurant {
         public RestaurantBuilder numTelefon(long numTelefon) {
             this.numTelefon = numTelefon;
             return this;
-=======
-    public static class RestaurantBuilder{
-
-        private final String nomRestaurant;
-        private final String direccio;
-        private final String poblacio;
-        private final double puntuacio;
-        private final String descripcio;
-        private final long numTelefon;
-
-        public RestaurantBuilder(String nomRestaurant, String direccio, String poblacio,
-                                 double puntuacio, String descripcio, long numTelefon){
-            this.nomRestaurant = nomRestaurant;
-            this.direccio = direccio;
-            this.poblacio = poblacio;
-            this.puntuacio = puntuacio;
-            this.descripcio = descripcio;
-            this.numTelefon = numTelefon;
->>>>>>> 9b865464573bae6fd5f83d214b39a2846bd4c03f
         }
 
         public Restaurant build(){
