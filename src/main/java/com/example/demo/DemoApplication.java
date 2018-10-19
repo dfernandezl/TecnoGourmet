@@ -31,7 +31,7 @@ public class DemoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-
+    	//una prova simplement
 
 
         Usuari aux = new Usuari.UsuariBuilder().userName("Prova").password("password").punts(0).reserves_no_presentades(0).build();
