@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulari alta usuari TecnoGourmet</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="registration-form">
+    <div class='fieldset'>
+        <legend>Registre Usuari TecnoGourmet</legend>
+        <form action="#" method="post" data-validate="parsley">
+            <div class='row'>
+                <label for='userName'>Nom d'usuari</label>
+                <input type="text" name='userName' id='userName' data-required="true" data-error-message="Nom d'usuari obligatori">
+            </div>
+            <div class='row'>
+                <label for="password">Contrassenya</label>
+                <input type="text" name='password' data-required="true" data-type="password" data-error-message="Contrassenya obligatòria">
+            </div>
+            <div class='row'>
+                <label for="cpassword">Confirmar contrassenya</label>
+                <input type="text" name='cpassword' data-required="true" data-error-message="Les contrassenyes no corresponen">
+            </div>
+            <input type="submit" value="Registrar-me">
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

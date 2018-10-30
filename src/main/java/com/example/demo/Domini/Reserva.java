@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-
 public class Reserva {
 
 	//Falta atribut Restaurant
