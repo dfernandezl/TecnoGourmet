@@ -25,5 +25,6 @@ CREATE TABLE Restaurant(
     poblacio VARCHAR(255),
     puntuacio INT,
     descripcio varchar(255),
-    telefon INT
+    telefon INT,
+    capacitat INT
 );

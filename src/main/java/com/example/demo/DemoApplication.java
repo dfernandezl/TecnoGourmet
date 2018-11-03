@@ -34,8 +34,11 @@ public class DemoApplication implements CommandLineRunner {
 
 
 
-        Usuari aux = new Usuari.UsuariBuilder().userName("Prova").password("password").punts(0).reserves_no_presentades(0).build();
+        Usuari aux = new Usuari.UsuariBuilder().userName("Prova").password("password").build();
+        Usuari aux2 = new Usuari.UsuariBuilder().userName("Prova2").password("password").build();
+
         usuUseCases.insert(aux);
+        usuUseCases.insert(aux2);
 
         System.out.println("Usuari Creat i inserit");
 
@@ -43,30 +46,36 @@ public class DemoApplication implements CommandLineRunner {
         usuUseCases.findAll().forEach(System.out::println);
 
 
-
-        Reserva var = new Reserva.ReservaBuilder().usuari("Prova").data_reserva("12/10/2019").comensals(8).presentat(1).id_reserva(89).build();
+        Reserva var = new Reserva.ReservaBuilder().usuari("Prova").data_reserva("12/10/2019").comensals(8).build();
+        //Reserva var2 = new Reserva.ReservaBuilder().usuari("Prova2").data_reserva("12/10/2019").comensals(8).build();
 
 
         rsvUseCases.insert(var);
 
-        System.out.println("Reserva creada i inserida");
+        //rsvUseCases.insert(var2);
+
+        System.out.println("Reserves creades i inserides");
 
 
         System.out.println("AQUI TENS TOTES LES RESERVES: ");
 
-        rsvUseCases.findAll().forEach(System.out::println); //Falta fer un tostring en reserves
+        rsvUseCases.findAll().forEach(System.out::println);
 
 
-
+/*
         Restaurant rest = new Restaurant.RestaurantBuilder().nomRestaurant("Rest1").direccio("C/Mossen Jaume Urgell").poblacio("Parets").puntuacio(10).descripcio("Molt bo").numTelefon(935621020).build();
+
+        Restaurant rest2 = new Restaurant.RestaurantBuilder().nomRestaurant("Rest2").direccio("C/Mossen Jaume Urgell").poblacio("Mollet").puntuacio(5).descripcio("Molt bo").numTelefon(935621020).build();
 
 
         restUseCases.insert(rest);
-        System.out.println("RESTAURANT INSERIT");
+        restUseCases.insert(rest2);
+        System.out.println("RESTAURANTS INSERITS");
 
 
         System.out.println("AQUI TENS TOTS ELS RESTAURANTS:");
         restUseCases.findAll().forEach(System.out::println);
+*/
 
     }
 }

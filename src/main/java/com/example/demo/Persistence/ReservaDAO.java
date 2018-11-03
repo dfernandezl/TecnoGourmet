@@ -1,6 +1,7 @@
 package com.example.demo.Persistence;
 
 import com.example.demo.Domini.Usuari;
+import com.sun.rowset.internal.Row;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -15,18 +16,16 @@ public class ReservaDAO {
 	 private JdbcTemplate jdbcTemplate;
 	 
 	 private final String FIND_ALL = "select * from Reserva";
-	 private final String INSERT = "insert into Reserva ( id_reserva, username, data_reserva, comensals, presentat) values(?, ?, ?, ?, ?)";
-
+	 private final String INSERT = "insert into Reserva (id_reserva, username, data_reserva, comensals, presentat) values(?,?, ?, ?, ?)";
+	 private final String SELECT_BY_ID = "SELECT * FROM Reserva WHERE id_reserva= ?";
 	 private final String UPDATE = "UPDATE Reserva SET data_reserva= ,comensals= ,presentat= ,  WHERE id_reserva= ";
 
 
 	 private final RowMapper<Reserva> mapper = (resultSet, i) -> {
 	        return new Reserva.ReservaBuilder()
 					.usuari(resultSet.getString("userName"))
-					.id_reserva(resultSet.getInt("id_reserva"))
 	                .data_reserva(resultSet.getString("data_reserva"))
 	                .comensals(resultSet.getInt("comensals"))
-	                .presentat(resultSet.getInt("presentat"))
 	                .build();
 	 };
 
@@ -41,13 +40,17 @@ public class ReservaDAO {
 	}
 
 	public int insert(Reserva reserva) {
-		return jdbcTemplate.update(INSERT, reserva.getId_reserva(), reserva.getUserName(), reserva.getData_reserva(), reserva.getComensals(),
-				reserva.isPresentat());
+		return jdbcTemplate.update(INSERT,reserva.getId_reserva(),reserva.getUserName(), reserva.getData_reserva(), reserva.getComensals(),
+				reserva.getPresentat());
 	}
 
 
 	public int update(Reserva reserva){
-		return jdbcTemplate.update(UPDATE,reserva.getData_reserva(),reserva.getComensals(),reserva.isPresentat(),reserva.getId_reserva());
+		return jdbcTemplate.update(UPDATE,reserva.getId_reserva(),reserva.getData_reserva(),reserva.getComensals(),reserva.getPresentat(),reserva.getId_reserva());
+	}
+
+	public Reserva findById(int id){
+		return jdbcTemplate.queryForObject(SELECT_BY_ID, new Object[]{id} , mapper);
 	}
 
 
