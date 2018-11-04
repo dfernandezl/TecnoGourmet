@@ -15,12 +15,12 @@ public class RestaurantDAO {
 
     private JdbcTemplate jdbcTemplate;
 
-    private final String INSERT = "insert into Restaurant (nom, direccio, poblacio, puntuacio, descripcio, telefon) values(?, ?, ?, ?, ?, ?)";
+    private final String INSERT = "insert into Restaurant (nom, direccio, poblacio, puntuacio, descripcio, telefon, capacitat) values(?, ?, ?, ?, ?, ?, ?)";
     private final String FIND_ALL = "select * from Restaurant";
     private final String FIND_BY_RESTAURANT_NAME = "select * from Restaurant where nom = ?";
     private final String FIND_BY_POBLACIO = "select * from Restaurant where poblacio = ?";
-    private final String FIND_BY_PUNTUACIO = "select * from Restaurant where puntuacio = ?";
-    private final String UPDATE = "update Restaurant set nom = ?, direccio = ?, poblacio = ?, puntuacio = ?, descripcio= ?, telefon = ?";
+    private final String FIND_BY_PUNTUACIO = "select * from Restaurant where puntuacio >= ? order by puntuacio";
+    private final String UPDATE = "update Restaurant set nom = ?, direccio = ?, poblacio = ?, puntuacio = ?, descripcio= ?, telefon = ? , capacitat=?";
 
 
 
@@ -32,6 +32,7 @@ public class RestaurantDAO {
                 .puntuacio(resultSet.getInt("puntuacio"))
                 .descripcio(resultSet.getString("descripcio"))
                 .numTelefon(resultSet.getInt("telefon"))
+                .capacitat(resultSet.getInt("capacitat"))
                 .build();
     };
 
@@ -47,13 +48,14 @@ public class RestaurantDAO {
 
 
     public int insert(Restaurant restaurant) {
+        System.out.println(restaurant);
         return jdbcTemplate.update(INSERT, restaurant.getNomRestaurant(), restaurant.getDireccio(), restaurant.getPoblacio(),
-                restaurant.getPuntuacio(),restaurant.getDescripcio(),restaurant.getNumTelefon());
+                restaurant.getPuntuacio(),restaurant.getDescripcio(),restaurant.getNumTelefon(), restaurant.getCapacitat());
     }
 
     public int update(Restaurant restaurant){
         return jdbcTemplate.update(UPDATE,restaurant.getNomRestaurant(), restaurant.getDireccio(), restaurant.getPoblacio(),
-                restaurant.getPuntuacio(),restaurant.getDescripcio(),restaurant.getNumTelefon());
+                restaurant.getPuntuacio(),restaurant.getDescripcio(),restaurant.getNumTelefon(), restaurant.getCapacitat());
     }
 
     public List<Restaurant> findByPoblacio(String poblacio) {

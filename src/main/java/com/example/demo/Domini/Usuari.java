@@ -31,8 +31,8 @@ public class Usuari {
 
         this.userName=ub.userName;
         this.password=ub.password;
-        this.punts=ub.punts;
-        this.reserves_no_presentades=ub.reserves_no_presentades;
+        this.punts=0;
+        this.reserves_no_presentades=0;
     }
 
 
@@ -44,7 +44,7 @@ public class Usuari {
         return this.password;
     }
 
-    public int punts(){
+    public int getPunts(){
         return this.punts;
     }
 
@@ -85,8 +85,6 @@ public class Usuari {
 
         public String userName;
         public String password;
-        public int punts;
-        public int reserves_no_presentades;
 
 
         public UsuariBuilder() {
@@ -101,17 +99,6 @@ public class Usuari {
             this.password = password;
             return this;
         }
-
-        public UsuariBuilder punts(int punts) {
-            this.punts = punts;
-            return this;
-        }
-
-        public UsuariBuilder reserves_no_presentades(int reserves_no_presentades) {
-            this.reserves_no_presentades = reserves_no_presentades;
-            return this;
-        }
-
 
         public Usuari build() {
             return new Usuari(this);

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Restaurants</title>
+</head>
+<body>
+<h1>Llistat de restuarants per població</h1>
+
+<ul>
+
+    <li th:each="rest : ${restList}" th:id="'rest_' + ${rest.nomRestaurant}">
+
+        <div><span><b>Nom: </b></span><span th:text="${rest.nomRestaurant}"></span></div>
+        <div><span><b>Direccio: </b></span><span th:text="${rest.direccio}"></span></div>
+        <div><span><b>Puntuació: </b></span><span th:text="${rest.puntuacio}"></span></div>
+        <div><span><b>Descripció: </b></span><span th:text="${rest.descripcio}"></span></div>
+        <div><span><b>Numero de telefon: </b></span><span th:text="${rest.numTelefon}"></span></div>
+        <div><span><b>Capacitat: </b></span><span th:text="${rest.capacitat}"></span></div>
+    </li>
+
+</ul>
+
+</body>
+</html>
