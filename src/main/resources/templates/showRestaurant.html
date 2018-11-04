@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>showClassroom</title>
+</head>
+<body>
+<h1 th:text="'Restaurant identified by ' + ${rest.nomRestaurant} + ':'"/>
+<ul>
+    <li>
+        <div><span><b>Nom: </b></span><span th:text="${rest.direccio}"></span></div>
+        <div><span><b>Direcció: </b></span><span th:text="${rest.capacitat}"></span></div>
+        <div><span><b>Població: </b></span><span th:text="${rest.poblacio}"></span></div>
+        <div><span><b>Puntuació: </b></span><span th:text="${rest.puntuacio}"></span></div>
+        <div><span><b>Descripció: </b></span><span th:text="${rest.descripcio}"></span></div>
+        <div><span><b>Numero de telefon: </b></span><span th:text="${rest.numTelefon}"></span></div>
+    </li>
+</ul>
+</body>
+</html>

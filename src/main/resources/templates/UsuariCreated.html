@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuari creat</title>
+</head>
+<body>
+<h1 th:text="'User successfully created identified by ' + ${usr.userName} + ':'"/>
+<ul>
+    <li>
+        <div><span><b>Nom: </b></span><span th:text="${usr.userName}"></span></div>
+        <div><span><b>Password: </b></span><span th:text="${usr.password}"></span></div>
+        <div><span><b>Punts: </b></span><span th:text="${usr.punts}"></span></div>
+        <div><span><b>Reserves no presentades: </b></span><span th:text="${usr.reserves_no_presentades}"></span></div>
+    </li>
+</ul>
+</body>
+</html>

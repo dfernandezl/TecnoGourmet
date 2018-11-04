@@ -29,6 +29,7 @@ public class ReservaUseCases {
         return rsvDAO.findAll();
     }
 
+    public Reserva findById(int id){return rsvDAO.findById(id);}
 
 
 }

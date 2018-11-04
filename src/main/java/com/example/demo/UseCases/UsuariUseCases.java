@@ -27,4 +27,7 @@ public class UsuariUseCases {
         return usuDAO.findAll();
     }
 
+
+    public Usuari findByName(String name) {return usuDAO.findByName(name);}
+
 }

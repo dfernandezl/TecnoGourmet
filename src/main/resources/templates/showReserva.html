@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>show Reserva</title>
+</head>
+<body>
+<h1 th:text="'Reserva identified by ' + ${rsv.id_reserva} + ':'"/>
+<ul>
+    <li>
+        <div><span><b>Nom Usuari: </b></span><span th:text="${rsv.userName}"></span></div>
+        <div><span><b>Data: </b></span><span th:text="${rsv.data_reserva}"></span></div>
+        <div><span><b>Comensals: </b></span><span th:text="${rsv.comensals}"></span></div>
+        <div><span><b>Presentat: </b></span><span th:text="${rsv.presentat}"></span></div>
+    </li>
+</ul>
+</body>
+</html>
