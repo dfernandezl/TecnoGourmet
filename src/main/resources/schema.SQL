@@ -1,6 +1,5 @@
 DROP TABLE if EXISTS Usuari;
-CREATE TABLE Usuari
-(
+CREATE TABLE Usuari(
   userName VARCHAR (55) PRIMARY KEY,
   password VARCHAR(255),
   punts INT,
@@ -17,10 +16,10 @@ CREATE TABLE Reserva(
   FOREIGN KEY (userName) REFERENCES Usuari(userName)
 );
 
-
 DROP TABLE if EXISTS Restaurant;
 CREATE TABLE Restaurant(
     nom varchar(255) PRIMARY KEY,
+    password varchar (255),
     direccio VARCHAR(255),
     poblacio VARCHAR(255),
     puntuacio INT,
