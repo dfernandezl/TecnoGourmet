@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Create User</title>
+    <title>Crear usuari</title>
     <style type="text/css">
         .error {
             color: red;
         }
     </style>
 </head>
-<body>
+<body style="background-color: #d5d5d5">
 
 <div align="center">
 
-    <h1>Register User</h1>
+    <h1>Registre d'usuari</h1>
 
+    <img src="logo.jpg" style="width:10%; height: 30%; margin-left: 5px; margin-top: 20px" class="w3-round"><br><br>
     <form action="#" th:action="@{/newUsu}" th:object="${usr}" method="POST">
         <div align="left" class="errors" th:if="${#fields.hasErrors('*')}">
             <ul>
@@ -24,18 +25,18 @@
         </div>
         <table>
             <tr>
-                <td><label th:class="${#fields.hasErrors('userName')}? 'error'">Name (at least 3 characters)</label>:</td>
+                <td><label th:class="${#fields.hasErrors('userName')}? 'error'">Nom (minim 3 caracters)</label>:</td>
                 <td><input type="text" th:field="*{userName}"
                            th:class="${#fields.hasErrors('userName')}? 'error'"/></td>
             </tr>
             <tr>
-                <td><label th:class="${#fields.hasErrors('password')}? 'error'">Password (at least 3 characters)</label>:</td>
-                <td><input type="text" th:field="*{password}"
+                <td><label th:class="${#fields.hasErrors('password')}? 'error'">Contrasenya (minim 3 caracters)</label>:</td>
+                <td><input type="password" th:field="*{password}"
                            th:class="${#fields.hasErrors('password')}? 'error'"/></td>
             </tr>
         </table>
 
-        <input type="submit" value="Create User"/>
+        <input type="submit" value="Crear usuari"/>
     </form>
 </div>
 </body>

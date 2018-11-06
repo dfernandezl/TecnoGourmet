@@ -8,12 +8,13 @@
         }
     </style>
 </head>
-<body>
+<body style="background-color: #d5d5d5">
 
 <div align="center">
 
-    <h1>Register Restaurant</h1>
+    <h1>Registre de restaurant</h1>
 
+    <img src="logo.jpg" style="width:10%; height: 30%; margin-left: 5px; margin-top: 20px" class="w3-round"><br><br>
     <form action="#" th:action="@{/newRest}" th:object="${rest}" method="POST">
         <div align="left" class="errors" th:if="${#fields.hasErrors('*')}">
             <ul>
@@ -28,6 +29,13 @@
                 <td><input type="text" th:field="*{nomRestaurant}"
                            th:class="${#fields.hasErrors('nomRestaurant')}? 'error'"/></td>
             </tr>
+
+            <tr>
+                <td><label th:class="${#fields.hasErrors('password')}? 'error'">Contrasenya</label>:</td>
+                <td><input type="password" th:field="*{password}"
+                           th:class="${#fields.hasErrors('password')}? 'error'"/></td>
+            </tr>
+
             <tr>
                 <td><label th:class="${#fields.hasErrors('direccio')}? 'error'">Direcció</label>:</td>
                 <td><input type="text" th:field="*{direccio}"
@@ -39,11 +47,6 @@
                            th:class="${#fields.hasErrors('poblacio')}? 'error'"/></td>
             </tr>
             <tr>
-                <td><label th:class="${#fields.hasErrors('descripcio')}? 'error'">Descripció</label>:</td>
-                <td><input type="text" th:field="*{descripcio}"
-                           th:class="${#fields.hasErrors('descripcio')}? 'error'"/></td>
-            </tr>
-            <tr>
                 <td><label th:class="${#fields.hasErrors('numTelefon')}? 'error'">Telefon</label>:</td>
                 <td><input type="text" th:field="*{numTelefon}"
                            th:class="${#fields.hasErrors('numTelefon')}? 'error'"/></td>
@@ -53,9 +56,19 @@
                 <td><input type="text" th:field="*{capacitat}"
                            th:class="${#fields.hasErrors('capacitat')}? 'error'"/></td>
             </tr>
-        </table>
 
-        <input type="submit" value="Create Restaurant"/>
+            <tr>
+                <td><label th:class="${#fields.hasErrors('descripcio')}? 'error'">Descripció</label>:</td>
+                <td><textarea rows="10" cols="50" type="text" th:field="*{descripcio}"
+                           th:class="${#fields.hasErrors('descripcio')}? 'error'"/></td>
+            </tr>
+
+            <tr>
+                <td><label>Imatge</label>:</td>
+                <td><input type="file"/></td>
+            </tr>
+        </table>
+        <input type="submit" value="Registrar restaurant"/>
     </form>
 </div>
 </body>
