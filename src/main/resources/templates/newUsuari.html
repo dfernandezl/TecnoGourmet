@@ -1,43 +1,42 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Crear usuari</title>
-    <style type="text/css">
-        .error {
-            color: red;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <title>Alta usuari TecnoGourmet</title>
+    <link href="styles.css" rel="stylesheet" type="text/css"/>
 </head>
-<body style="background-color: #d5d5d5">
+<body>
 
-<div align="center">
-
-    <h1>Registre d'usuari</h1>
-
-    <img src="logo.jpg" style="width:10%; height: 30%; margin-left: 5px; margin-top: 20px" class="w3-round"><br><br>
-    <form action="#" th:action="@{/newUsu}" th:object="${usr}" method="POST">
-        <div align="left" class="errors" th:if="${#fields.hasErrors('*')}">
-            <ul>
-                <li th:each="err : ${#fields.errors('*')}"
-                    th:text="${err}">Input is incorrect
-                </li>
-            </ul>
-        </div>
-        <table>
-            <tr>
-                <td><label th:class="${#fields.hasErrors('userName')}? 'error'">Nom (minim 3 caracters)</label>:</td>
-                <td><input type="text" th:field="*{userName}"
-                           th:class="${#fields.hasErrors('userName')}? 'error'"/></td>
-            </tr>
-            <tr>
-                <td><label th:class="${#fields.hasErrors('password')}? 'error'">Contrasenya (minim 3 caracters)</label>:</td>
-                <td><input type="password" th:field="*{password}"
-                           th:class="${#fields.hasErrors('password')}? 'error'"/></td>
-            </tr>
-        </table>
-
-        <input type="submit" value="Crear usuari"/>
-    </form>
+<div id="registration-form">
+    <div class='fieldset'>
+        <legend>Registre Usuari</legend>
+        <div align="center">  <img src="logo.jpg" style="width:80%; height: 100%; margin-left: 5px; margin-top: 20px" class="w3-round"><br><br> </div>
+        <form action="#" th:action="@{/newUsu}" th:object="${usr}" method="POST">
+            <div align="left" class="errors" th:if="${#fields.hasErrors('*')}">
+                <ul>
+                    <li th:each="err : ${#fields.errors('*')}"
+                        th:text="${err}">Input is incorrect
+                    </li>
+                </ul>
+            </div>
+            <table>
+                <tr>
+                    <td><label th:class="${#fields.hasErrors('userName')}? 'error'">Nom d'usuari (mínim 3 caràcters)</label>:</td>
+                    <td><input type="text" th:field="*{userName}"
+                               th:class="${#fields.hasErrors('userName')}? 'error'"/></td>
+                </tr>
+                <tr>
+                    <td><label th:class="${#fields.hasErrors('password')}? 'error'">Contrassenya (mínim 3 caràcters)</label>:</td>
+                    <td><input type="password" th:field="*{password}"
+                               th:class="${#fields.hasErrors('password')}? 'error'"/></td>
+                </tr>
+            </table>
+            <input type="submit" value="Registrar-me">
+        </form>
+    </div>
 </div>
+
+
 </body>
 </html>
