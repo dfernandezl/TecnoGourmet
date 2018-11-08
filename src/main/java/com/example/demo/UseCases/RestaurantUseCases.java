@@ -11,8 +11,12 @@ import java.util.List;
 @Service("restaurantUseCases")
 public class RestaurantUseCases {
 
-    @Autowired
+
     private RestaurantDAO restDAO;
+
+    public RestaurantUseCases(RestaurantDAO restDAO) {
+        this.restDAO = restDAO;
+    }
 
     public void insert(Restaurant rest){
         restDAO.insert(rest);

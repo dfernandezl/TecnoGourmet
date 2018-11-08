@@ -19,7 +19,6 @@ public class GETWebController {
     private ReservaUseCases rsvUseCases;
 
     public GETWebController(RestaurantUseCases restUsesCases,UsuariUseCases usuUseCases,ReservaUseCases rsvUseCases) {
-
         this.restUsesCases = restUsesCases;
         this.usuUseCases=usuUseCases;
         this.rsvUseCases= rsvUseCases;
