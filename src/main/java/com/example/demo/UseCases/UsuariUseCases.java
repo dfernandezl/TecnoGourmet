@@ -11,8 +11,14 @@ import java.util.List;
 @Service("usuariUseCases")
 public class UsuariUseCases {
 
-    @Autowired
+
     private UsuariDAO usuDAO;
+
+    public UsuariUseCases(UsuariDAO usuDAO) {
+        this.usuDAO = usuDAO;
+    }
+
+
 
     public void insert(Usuari usuari){
             usuDAO.insert(usuari);
@@ -22,11 +28,9 @@ public class UsuariUseCases {
         usuDAO.updatePassword(usuari);
     }
 
-
     public List<Usuari> findAll() {
         return usuDAO.findAll();
     }
-
 
     public Usuari findByName(String name) {return usuDAO.findByName(name);}
 

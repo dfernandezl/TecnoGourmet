@@ -14,8 +14,11 @@ import java.util.List;
 public class ReservaUseCases {
 
 
-    @Autowired
     private ReservaDAO rsvDAO;
+
+    public ReservaUseCases(ReservaDAO rsvDAO) {
+        this.rsvDAO = rsvDAO;
+    }
 
     public void insert(Reserva reserva){
         rsvDAO.insert(reserva);
