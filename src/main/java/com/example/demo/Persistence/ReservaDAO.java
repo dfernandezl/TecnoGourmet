@@ -1,13 +1,10 @@
 package com.example.demo.Persistence;
 
-import com.example.demo.Domini.Usuari;
-import com.sun.rowset.internal.Row;
+import com.example.demo.Domini.Reserva;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
-import com.example.demo.Domini.Reserva;
 
 import java.util.List;
 
