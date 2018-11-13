@@ -14,7 +14,8 @@ public class Restaurant {
     private String descripcio;
     private long numTelefon;
     private int capacitat;
-    //private String src;
+
+    //private String foto;
 
 
     public Restaurant(){
@@ -32,6 +33,12 @@ public class Restaurant {
         //src=builder.imatge.getAbsolutePath();
 
     }
+
+
+     /*
+    public String getFoto() { return foto;}
+    */
+
 
     public String getNomRestaurant() {
         return nomRestaurant;
@@ -65,10 +72,9 @@ public class Restaurant {
         return capacitat;
     }
 
-    /*
-    public String getSrc() { return src;}
 
-    public void setSrc(String src){ this.src=src; }
+    /*
+    public void setFoto(String foto){ this.foto=foto; }
     */
 
     public void setNomRestaurant(String nomRestaurant) {

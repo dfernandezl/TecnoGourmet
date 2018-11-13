@@ -69,7 +69,8 @@ public class GETWebController {
     @GetMapping("/newUsuari")
     public String createUsuari(Model model) {
         model.addAttribute("usr", new Usuari());
-        return "newUsuari";
+        //return "newUsuari";
+        return "altaUsuariForm";
     }
 
     @GetMapping("/showUser/{name}")
@@ -80,6 +81,9 @@ public class GETWebController {
 
 
     //TODO: ACTUALITZAR USUARI
+
+
+
 
 
 
@@ -104,6 +108,15 @@ public class GETWebController {
 
 
     //TODO: ACTUALITZAR/MODIFICAR RESERVA
+
+
+    //Prova
+
+    @GetMapping("/")
+    public String uploadImage(Model model){
+        model.addAttribute("rest",new Restaurant.RestaurantBuilder());
+        return "UploadImage";
+    }
 
 
 }

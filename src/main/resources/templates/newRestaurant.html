@@ -15,7 +15,7 @@
     <h1>Registre de restaurant</h1>
 
     <img src="logo.jpg" style="width:10%; height: 30%; margin-left: 5px; margin-top: 20px" class="w3-round"><br><br>
-    <form action="#" th:action="@{/newRest}" th:object="${rest}" method="POST">
+    <form action="#" th:action="@{/newRest}" th:object="${rest}" method="POST" enctype="multipart/form-data">
         <div align="left" class="errors" th:if="${#fields.hasErrors('*')}">
             <ul>
                 <li th:each="err : ${#fields.errors('*')}"
