@@ -1,74 +1,75 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Alta restaurant TecnoGourmet</title>
-    <link href="styles.css" rel="stylesheet" type="text/css"/>
+    <title>Create Restaurant</title>
+    <style type="text/css">
+        .error {
+            color: red;
+        }
+    </style>
 </head>
-<body>
+<body style="background-color: #d5d5d5">
 
-<div id="registration-form">
-    <div class='fieldset'>
-        <legend>Registre restaurant</legend>
-        <div align="center"><img src="logo.jpg" style="width:80%; height: 100%; margin-left: 5px; margin-top: 20px" class="w3-round"><br><br> </div>
-        <form action="#" th:action="@{/newRest}" th:object="${rest}" method="POST">
-            <div align="left" class="errors" th:if="${#fields.hasErrors('*')}">
-                <ul>
-                    <li th:each="err : ${#fields.errors('*')}"
-                        th:text="${err}">Input is incorrect
-                    </li>
-                </ul>
-            </div>
-            <table>
-                <tr>
-                    <td><label th:class="${#fields.hasErrors('nomRestaurant')}? 'error'">Nom </label>:</td>
-                    <td><input type="text" th:field="*{nomRestaurant}"
-                               th:class="${#fields.hasErrors('nomRestaurant')}? 'error'"/></td>
-                </tr>
-                <tr>
-                    <td><label th:class="${#fields.hasErrors('password')}? 'error'">Contrasenya</label>:</td>
-                    <td><input type="password" th:field="*{password}"
-                               th:class="${#fields.hasErrors('password')}? 'error'"/></td>
-                </tr>
+<div align="center">
 
-                <tr>
-                    <td><label th:class="${#fields.hasErrors('direccio')}? 'error'">Direcció</label>:</td>
-                    <td><input type="text" th:field="*{direccio}"
-                               th:class="${#fields.hasErrors('direccio')}? 'error'"/></td>
-                </tr>
-                <tr>
-                    <td><label th:class="${#fields.hasErrors('poblacio')}? 'error'">Població</label>:</td>
-                    <td><input type="text" th:field="*{poblacio}"
-                               th:class="${#fields.hasErrors('poblacio')}? 'error'"/></td>
-                </tr>
-                <tr>
-                    <td><label th:class="${#fields.hasErrors('numTelefon')}? 'error'">Telefon</label>:</td>
-                    <td><input type="text" th:field="*{numTelefon}"
-                               th:class="${#fields.hasErrors('numTelefon')}? 'error'"/></td>
-                </tr>
-                <tr>
-                    <td><label th:class="${#fields.hasErrors('capacitat')}? 'error'">Capacitat</label>:</td>
-                    <td><input type="text" th:field="*{capacitat}"
-                               th:class="${#fields.hasErrors('capacitat')}? 'error'"/></td>
-                </tr>
-                <tr>
-                    <td><label th:class="${#fields.hasErrors('descripcio')}? 'error'">Descripció</label>:</td>
-                    <td><textarea rows="10" cols="45" type="text" th:field="*{descripcio}"
-                                  th:class="${#fields.hasErrors('descripcio')}? 'error'"/> </textarea></td>
-                </tr>
+    <h1>Registre de restaurant</h1>
 
-                 <tr>
-                     <td><label>Imatge</label>:</td>
-                     <td><input type="file"/></td>
-                 </tr>
-            </table>
-            <input type="submit" value="Registrar restaurant"/>
+    <img src="logo.jpg" style="width:10%; height: 30%; margin-left: 5px; margin-top: 20px" class="w3-round"><br><br>
+    <form action="#" th:action="@{/newRest}" th:object="${rest}" method="POST" enctype="multipart/form-data">
+        <div align="left" class="errors" th:if="${#fields.hasErrors('*')}">
+            <ul>
+                <li th:each="err : ${#fields.errors('*')}"
+                    th:text="${err}">Input is incorrect
+                </li>
+            </ul>
+        </div>
+        <table>
+            <tr>
+                <td><label th:class="${#fields.hasErrors('nomRestaurant')}? 'error'">Nom</label>:</td>
+                <td><input type="text" th:field="*{nomRestaurant}"
+                           th:class="${#fields.hasErrors('nomRestaurant')}? 'error'"/></td>
+            </tr>
 
-        </form>
-    </div>
+            <tr>
+                <td><label th:class="${#fields.hasErrors('password')}? 'error'">Contrasenya</label>:</td>
+                <td><input type="password" th:field="*{password}"
+                           th:class="${#fields.hasErrors('password')}? 'error'"/></td>
+            </tr>
+
+            <tr>
+                <td><label th:class="${#fields.hasErrors('direccio')}? 'error'">Direcció</label>:</td>
+                <td><input type="text" th:field="*{direccio}"
+                           th:class="${#fields.hasErrors('direccio')}? 'error'"/></td>
+            </tr>
+            <tr>
+                <td><label th:class="${#fields.hasErrors('poblacio')}? 'error'">Població</label>:</td>
+                <td><input type="text" th:field="*{poblacio}"
+                           th:class="${#fields.hasErrors('poblacio')}? 'error'"/></td>
+            </tr>
+            <tr>
+                <td><label th:class="${#fields.hasErrors('numTelefon')}? 'error'">Telefon</label>:</td>
+                <td><input type="text" th:field="*{numTelefon}"
+                           th:class="${#fields.hasErrors('numTelefon')}? 'error'"/></td>
+            </tr>
+            <tr>
+                <td><label th:class="${#fields.hasErrors('capacitat')}? 'error'">Capacitat</label>:</td>
+                <td><input type="text" th:field="*{capacitat}"
+                           th:class="${#fields.hasErrors('capacitat')}? 'error'"/></td>
+            </tr>
+
+            <tr>
+                <td><label th:class="${#fields.hasErrors('descripcio')}? 'error'">Descripció</label>:</td>
+                <td><textarea rows="10" cols="50" type="text" th:field="*{descripcio}"
+                           th:class="${#fields.hasErrors('descripcio')}? 'error'"/></td>
+            </tr>
+
+            <tr>
+                <td><label>Imatge</label>:</td>
+                <td><input type="file" name="fichero"/></td>
+            </tr>
+        </table>
+        <input type="submit" value="Registrar restaurant"/>
+    </form>
 </div>
-
-
 </body>
 </html>
