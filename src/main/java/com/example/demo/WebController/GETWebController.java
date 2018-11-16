@@ -75,8 +75,7 @@ public class GETWebController {
     @GetMapping("/newUsuari")
     public String createUsuari(Model model) {
         model.addAttribute("usr", new Usuari());
-        //return "newUsuari";
-        return "altaUsuariForm";
+        return "newUsuari";
     }
 
     @GetMapping("/showUser/{name}")

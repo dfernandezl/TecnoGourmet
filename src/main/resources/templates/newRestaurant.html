@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Create Restaurant</title>
-    <style type="text/css">
-        .error {
-            color: red;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <title>Alta restaurant TecnoGourmet</title>
+    <link href="styles.css" rel="stylesheet" type="text/css"/>
 </head>
-<body style="background-color: #d5d5d5">
 
-<div align="center">
+<body>
 
-    <h1>Registre de restaurant</h1>
-
-    <img src="logo.jpg" style="width:10%; height: 30%; margin-left: 5px; margin-top: 20px" class="w3-round"><br><br>
+<div id="registration-form">
+    <div class='fieldset'>
+        <legend>Registre restaurant</legend>
+        <div align="center"><img src="logo.jpg" style="width:80%; height: 100%; margin-left: 5px; margin-top: 20px" class="w3-round"><br><br> </div>
     <form action="#" th:action="@{/newRest}" th:object="${rest}" method="POST" enctype="multipart/form-data">
         <div align="left" class="errors" th:if="${#fields.hasErrors('*')}">
             <ul>
@@ -70,6 +67,7 @@
         </table>
         <input type="submit" value="Registrar restaurant"/>
     </form>
+    </div>
 </div>
 </body>
 </html>
