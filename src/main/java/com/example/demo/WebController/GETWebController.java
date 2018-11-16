@@ -6,6 +6,13 @@ import com.example.demo.Domini.Usuari;
 import com.example.demo.UseCases.ReservaUseCases;
 import com.example.demo.UseCases.RestaurantUseCases;
 import com.example.demo.UseCases.UsuariUseCases;
+
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,7 +63,6 @@ public class GETWebController {
     }
 
 
-
     //usuaris
 
     @GetMapping("showUsers") //Nomes hauria de ser visible per administrador
@@ -101,7 +107,7 @@ public class GETWebController {
         model.addAttribute("rsv",this.rsvUseCases.findById(id_reserva));
         return "showReserva";
     }
-
+    
 
     //TODO: ACTUALITZAR/MODIFICAR RESERVA
 

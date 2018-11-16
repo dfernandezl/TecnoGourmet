@@ -32,26 +32,26 @@ public class POSTWebController {
     }
 
 
-        @PostMapping("/newUsu")
-        public String createClassroom(@Valid @ModelAttribute("usr") Usuari usr, Errors errors, Model model, RedirectAttributes redirectAttributes) {
+	@PostMapping("/newUsu")
+	public String createClassroom(@Valid @ModelAttribute("usr") Usuari usr, Errors errors, Model model,
+			RedirectAttributes redirectAttributes) {
 
+		if (errors.hasErrors()) {
+			model.addAttribute("usr", usr);
 
-            if (errors.hasErrors()) {
-                model.addAttribute("usr", usr);
+			return "newUsuari";
+		}
 
-                return "newUsuari";
-            }
+		// System.out.println(usr);
 
-            //System.out.println(usr);
+		model.addAttribute("name", usr.getUserName());
 
-            model.addAttribute("name", usr.getUserName());
+		usuUseCases.insert(usr);
 
-            usuUseCases.insert(usr);
+		redirectAttributes.addAttribute("name", usr.getUserName());
 
-            redirectAttributes.addAttribute("name", usr.getUserName());
-
-            return "redirect:/showUser/{name}";
-        }
+		return "redirect:/showUser/{name}";
+	}
 
 
     @PostMapping("/newRest")
