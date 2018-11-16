@@ -6,39 +6,35 @@ import java.io.File;
 
 public class Restaurant {
 
-    private String nomRestaurant;
-    private String password;
-    private String direccio;
-    private String poblacio;
-    private double puntuacio;
-    private String descripcio;
-    private long numTelefon;
-    private int capacitat;
+    public String nomRestaurant;
+    public String password;
+    public String direccio;
+    public String poblacio;
+    public double puntuacio;
+    public String descripcio;
+    public long numTelefon;
+    public  int capacitat;
 
-    //private String foto;
+    public  String foto;
 
 
     public Restaurant(){
 
     }
 
-    private Restaurant(RestaurantBuilder builder) {
-        nomRestaurant = builder.nomRestaurant;
-        direccio = builder.direccio;
-        poblacio = builder.poblacio;
-        puntuacio = 0;
-        descripcio = builder.descripcio;
-        numTelefon = builder.numTelefon;
-        capacitat= builder.capacitat;
-        //src=builder.imatge.getAbsolutePath();
-
+    public  Restaurant(String nomRestaurant,String password,String direccio,String poblacio,Double puntuacio,String descripcio,long numTelefon,int capacitat,String foto) {
+        this.nomRestaurant = nomRestaurant;
+        this.direccio =direccio;
+        this.poblacio = poblacio;
+        this.puntuacio = puntuacio;
+        this.descripcio = descripcio;
+        this.numTelefon = numTelefon;
+        this.capacitat= capacitat;
+        this.foto=foto;
     }
 
 
-     /*
     public String getFoto() { return foto;}
-    */
-
 
     public String getNomRestaurant() {
         return nomRestaurant;
@@ -73,9 +69,9 @@ public class Restaurant {
     }
 
 
-    /*
+
     public void setFoto(String foto){ this.foto=foto; }
-    */
+
 
     public void setNomRestaurant(String nomRestaurant) {
         this.nomRestaurant=nomRestaurant;
@@ -110,75 +106,8 @@ public class Restaurant {
     }
 
     public String toString(){
-        return "nom: "+this.nomRestaurant+", direcció: "+this.direccio+" capcitat:"+this.capacitat+", poblacio: "+ this.poblacio+", puntuacio: "+this.puntuacio+",descripcio: "+this.descripcio+", telefon: "+numTelefon;
+        return "nom: "+this.nomRestaurant+", direcció: "+this.direccio+" capcitat:"+this.capacitat+", poblacio: "+ this.poblacio+", puntuacio: "+this.puntuacio+",descripcio: "+this.descripcio+", telefon: "+numTelefon+", foto:"+this.foto;
     }
 
 
-    public static class RestaurantBuilder{
-
-        private String nomRestaurant;
-        private String direccio;
-        private String poblacio;
-        private double puntuacio;
-        private String descripcio;
-        private long numTelefon;
-        private int capacitat;
-        private String password;
-        //private File imatge;
-
-
-        public  RestaurantBuilder() {
-        }
-
-        /*
-        public RestaurantBuilder imatge(File imatge) {
-            System.out.println(imatge.getAbsolutePath());
-            this.imatge = imatge;
-            return this;
-        }
-        */
-        public RestaurantBuilder password(String password) {
-            this.password = password;
-            return this;
-        }
-        public RestaurantBuilder nomRestaurant(String nomRestaurant) {
-            this.nomRestaurant = nomRestaurant;
-            return this;
-        }
-
-        public RestaurantBuilder direccio(String direccio) {
-            this.direccio = direccio;
-            return this;
-        }
-
-        public RestaurantBuilder poblacio(String poblacio) {
-            this.poblacio = poblacio;
-            return this;
-        }
-
-        public RestaurantBuilder puntuacio(double puntuacio) {
-            this.puntuacio = puntuacio;
-            return this;
-        }
-
-        public RestaurantBuilder descripcio(String descripcio) {
-            this.descripcio = descripcio;
-            return this;
-        }
-
-        public RestaurantBuilder numTelefon(long numTelefon) {
-            this.numTelefon = numTelefon;
-            return this;
-        }
-
-        public RestaurantBuilder capacitat(int capacitat) {
-            this.capacitat = capacitat;
-            return this;
-        }
-
-        public Restaurant build(){
-            return new Restaurant(this);
-        }
-
-    }
 }

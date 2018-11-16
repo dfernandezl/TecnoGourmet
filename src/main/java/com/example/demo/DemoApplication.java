@@ -11,6 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
@@ -33,7 +34,6 @@ public class DemoApplication implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
     	//una prova simplement
-
 
         Usuari aux = new Usuari.UsuariBuilder().userName("Prova").password("password").build();
         Usuari aux2 = new Usuari.UsuariBuilder().userName("Prova2").password("password").build();
@@ -77,6 +77,8 @@ public class DemoApplication implements CommandLineRunner {
         System.out.println("AQUI TENS TOTS ELS RESTAURANTS:");
         restUseCases.findAll().forEach(System.out::println);
 */
-
     }
+
+
+
 }
