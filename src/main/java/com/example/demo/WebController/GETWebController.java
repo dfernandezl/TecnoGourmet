@@ -114,14 +114,12 @@ public class GETWebController {
 
     //TODO: ACTUALITZAR/MODIFICAR RESERVA
 
-
-
-    //Prova
-
+/*
     @GetMapping("/")
     public String uploadImage(Model model){
         return "UploadImage";
     }
+*/
 
 
 }
