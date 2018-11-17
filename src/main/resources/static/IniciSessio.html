@@ -1,28 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Inici de sessió</title>
+    <title>Inici sessió</title>
+    <link href="styles.css" rel="stylesheet" type="text/css"/>
 </head>
-<body style="background-color: #d5d5d5">
+<body>
 
-<div align="center">
-
-    <h1>Inici de sessió</h1>
-    <img src="logo.jpg" style="width:10%; height: 30%; margin-left: 5px; margin-top: 20px" class="w3-round"><br><br>
-    <table>
-
-        <tr>
-            <td><label> Nom </label>:</td>
-            <td><input type="text"/></td>
-        </tr>
-
-        <tr>
-            <td><label> Contrasenya </label>:</td>
-            <td><input type="password"/></td>
-        </tr>
-    </table>
-    <input type="submit" value="Validar credencials">
+<div id="registration-form">
+    <div class='fieldset'>
+        <legend>Inici  Sessió</legend>
+        <div align="center">  <img src="logo.jpg" style="width:80%; height: 100%; margin-left: 5px; margin-top: 20px" class="w3-round"><br><br> </div>
+        <form action="#" action="@{AQUI}"  method="POST">
+            <table>
+                <tr>
+                    <td><label>Nom d'usuari</label>:</td>
+                    <td><input type="text"/></td>
+                </tr>
+                <tr>
+                    <td><label >Contrassenya</label>:</td>
+                    <td><input type="password" /></td>
+                </tr>
+            </table>
+            <input type="submit" value="Validar">
+        </form>
+    </div>
 </div>
 
 
