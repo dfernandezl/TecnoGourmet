@@ -114,12 +114,11 @@ public class GETWebController {
 
     //TODO: ACTUALITZAR/MODIFICAR RESERVA
 
-/*
-    @GetMapping("/")
-    public String uploadImage(Model model){
-        return "UploadImage";
-    }
-*/
 
+    @GetMapping("/index")
+    public String showIndex(Model model){
+        model.addAttribute("restList",this.restUsesCases.findAll());
+        return "index";
+    }
 
 }
