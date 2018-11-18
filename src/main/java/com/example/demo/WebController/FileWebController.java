@@ -39,10 +39,10 @@ public class FileWebController {
             try {
                 byte[] bytes = file.getBytes();
                 BufferedOutputStream stream =
-                        new BufferedOutputStream(new FileOutputStream(new File("Imatges/"+name + ".png")));
+                        new BufferedOutputStream(new FileOutputStream(new File("src/main/resources/static/"+name)));
                 stream.write(bytes);
                 stream.close();
-                return "You successfully uploaded " + name + " into Imatges/" + name + "!";
+                return "You successfully uploaded " + name + " into src/main/resources/static" + name + "!";
             } catch (Exception e) {
                 return "You failed to upload " + name + " => " + e.getMessage();
             }

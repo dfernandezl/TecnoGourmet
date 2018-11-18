@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartResolver;
 
 import javax.servlet.MultipartConfigElement;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class GETWebController {
@@ -118,6 +120,12 @@ public class GETWebController {
     @GetMapping("/index")
     public String showIndex(Model model){
         model.addAttribute("restList",this.restUsesCases.findAll());
+        List<String> options= new ArrayList<>();
+        options.add("Ciutat");
+        options.add("Puntució");
+        options.add("Nom");
+        model.addAttribute("optionsList",options);
+
         return "index";
     }
 
