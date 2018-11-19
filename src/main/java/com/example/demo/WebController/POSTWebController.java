@@ -87,4 +87,12 @@ public class POSTWebController {
         return "redirect:/showRest/{name}";
     }
 
+
+    @PostMapping("/login")
+    public String login(@Valid @ModelAttribute("usr") Usuari usr, Errors errors, Model model, RedirectAttributes redirectAttributes) {
+
+
+       return "";
+    }
+
 }
