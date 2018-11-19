@@ -9,8 +9,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 
-//@Controller
-public class FileWebController {
+public class FileWeb {
 
     public static String handleFileUpload(@RequestParam("fichero") MultipartFile file){
         String name = file.getOriginalFilename();
