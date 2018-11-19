@@ -63,20 +63,25 @@ public class DemoApplication implements CommandLineRunner {
         rsvUseCases.findAll().forEach(System.out::println);
 
 
-/*
-        Restaurant rest = new Restaurant.RestaurantBuilder().nomRestaurant("Rest1").direccio("C/Mossen Jaume Urgell").poblacio("Parets").puntuacio(10).descripcio("Molt bo").numTelefon(935621020).build();
 
-        Restaurant rest2 = new Restaurant.RestaurantBuilder().nomRestaurant("Rest2").direccio("C/Mossen Jaume Urgell").poblacio("Mollet").puntuacio(5).descripcio("Molt bo").numTelefon(935621020).build();
+        //Restaurant rest = new Restaurant("Rest1","password","C/Mossen Jaume Urgell","Parets",10.0,"Molt bo",935621020,10,"Rest1.png");
+        Restaurant rest1 = new Restaurant("Rest1","password","C/Mossen Jaume Urgell","Mollet",10.0,"Molt bo",935621020,10,"Rest2.jpg");
+        Restaurant rest2 = new Restaurant("Rest2","password","C/Mossen Jaume Urgell","Granollers",10.0,"Molt bo",935621020,10,"Rest3.jpg");
+        Restaurant rest3 = new Restaurant("Rest3","password","C/Mossen Jaume Urgell","Mataró",10.0,"Molt bo",935621020,10,"Rest4.jpg");
+        Restaurant rest4 = new Restaurant("Rest4","password","C/Mossen Jaume Urgell","Paris",10.0,"Molt bo",935621020,10,"Rest5.jpg");
 
-
-        restUseCases.insert(rest);
+        restUseCases.insert(rest1);
         restUseCases.insert(rest2);
+        restUseCases.insert(rest3);
+        restUseCases.insert(rest4);
+
         System.out.println("RESTAURANTS INSERITS");
 
 
         System.out.println("AQUI TENS TOTS ELS RESTAURANTS:");
         restUseCases.findAll().forEach(System.out::println);
-*/
+
+
     }
 
 

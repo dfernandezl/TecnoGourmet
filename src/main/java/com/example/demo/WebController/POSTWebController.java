@@ -49,24 +49,6 @@ public class POSTWebController {
 
             return "redirect:/showUser/{name}";
         }
-/*
-    @PostMapping("/newRest")
-    public String handleFileUpload(@Valid @ModelAttribute("rest") Restaurant rest, Errors errors, Model model, RedirectAttributes redirectAttributes) {
-
-
-        if (errors.hasErrors()) {
-            model.addAttribute("rest", rest);
-
-            return "newRest";
-        }
-
-        model.addAttribute("nom", rest.getNomRestaurant());
-
-        restUseCases.insert(rest);
-        redirectAttributes.addAttribute("nom", rest.getNomRestaurant());
-        return "redirect:/showRest/{nom}";
-    }
-*/
 
     @PostMapping("/newResv")
     public String createReservation(@Valid @ModelAttribute("rsv") Reserva rsv, Errors errors, Model model, RedirectAttributes redirectAttributes) {
@@ -98,7 +80,7 @@ public class POSTWebController {
         model.addAttribute("name", rest.getNomRestaurant());
 
         FileWebController.handleFileUpload(file);
-        rest.setFoto("Imatges/"+file.getOriginalFilename() + ".png");
+        rest.setFoto(file.getOriginalFilename()); //"src/main/resources/static"
         restUseCases.insert(rest);
         redirectAttributes.addAttribute("name", rest.getNomRestaurant());
         return "redirect:/showRest/{name}";
