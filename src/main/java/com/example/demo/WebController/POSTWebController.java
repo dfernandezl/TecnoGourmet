@@ -1,9 +1,6 @@
 package com.example.demo.WebController;
 
-import com.example.demo.Domini.FileWeb;
-import com.example.demo.Domini.Reserva;
-import com.example.demo.Domini.Restaurant;
-import com.example.demo.Domini.Usuari;
+import com.example.demo.Domini.*;
 import com.example.demo.UseCases.ReservaUseCases;
 import com.example.demo.UseCases.RestaurantUseCases;
 import com.example.demo.UseCases.UsuariUseCases;
@@ -91,8 +88,13 @@ public class POSTWebController {
     @PostMapping("/login")
     public String login(@Valid @ModelAttribute("usr") Usuari usr, Errors errors, Model model, RedirectAttributes redirectAttributes) {
 
+        LogIn usuValidar= new LogIn(usr.getUserName(),usr.getPassword());
 
-       return "";
+        if(usuUseCases.validateUser(usuValidar)==null){
+            return "loginNOValidated";
+        }else{
+            return "loginValidated";
+        }
     }
 
 }
