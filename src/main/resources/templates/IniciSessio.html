@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Inici sessió</title>
-    <link href="styles.css" rel="stylesheet" type="text/css"/>
+    <link href="/styles.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
 <div id="registration-form">
     <div class='fieldset'>
         <legend>Inici  Sessió</legend>
-        <div align="center">  <img src="logo.jpg" style="width:80%; height: 100%; margin-left: 5px; margin-top: 20px" class="w3-round"><br><br> </div>
-        <form action="#" th:action="@{/login}"  th:object="${usr}" method="POST">
+        <div align="center">  <img src="/logo.jpg" style="width:80%; height: 100%; margin-left: 5px; margin-top: 20px" class="w3-round"><br><br> </div>
+        <form action="#" th:action="@{/login}" th:object="${usr}" method="POST">
             <table>
                 <tr>
                     <td><label>Nom d'usuari</label>:</td>
@@ -19,10 +19,10 @@
                 </tr>
                 <tr>
                     <td><label >Contrassenya</label>:</td>
-                    <td><input type="password" th:field="*{password} /></td>
+                    <td><input type="password" th:field="*{password}" /></td>
                 </tr>
             </table>
-            <input type="submit" value="Validar">
+            <input type="submit" value="Validar"/>
         </form>
     </div>
 </div>
