@@ -6,14 +6,11 @@ import com.example.demo.Domini.Usuari;
 import com.example.demo.UseCases.ReservaUseCases;
 import com.example.demo.UseCases.RestaurantUseCases;
 import com.example.demo.UseCases.UsuariUseCases;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.multipart.MultipartResolver;
 
-import javax.servlet.MultipartConfigElement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,12 +86,7 @@ public class GETWebController {
     //TODO: ACTUALITZAR USUARI
 
 
-
-
-
-
     //Reserves
-
 
 
     //TODO:CREAR-INSERIR RESERVA
@@ -116,7 +108,7 @@ public class GETWebController {
     //TODO: ACTUALITZAR/MODIFICAR RESERVA
 
 
-    @GetMapping("/index")
+    @GetMapping("/")
     public String showIndex(Model model){
         model.addAttribute("restList",this.restUsesCases.findAll());
         List<String> options= new ArrayList<>();
@@ -127,5 +119,15 @@ public class GETWebController {
 
         return "index";
     }
+
+
+    //login
+/*
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("usr", new Usuari());
+        return "IniciSessio";
+    }
+*/
 
 }

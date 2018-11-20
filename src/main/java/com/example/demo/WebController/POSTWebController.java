@@ -1,5 +1,6 @@
 package com.example.demo.WebController;
 
+import com.example.demo.Domini.FileWeb;
 import com.example.demo.Domini.Reserva;
 import com.example.demo.Domini.Restaurant;
 import com.example.demo.Domini.Usuari;
@@ -79,11 +80,19 @@ public class POSTWebController {
 
         model.addAttribute("name", rest.getNomRestaurant());
 
-        FileWebController.handleFileUpload(file);
+        FileWeb.handleFileUpload(file);
         rest.setFoto(file.getOriginalFilename()); //"src/main/resources/static"
         restUseCases.insert(rest);
         redirectAttributes.addAttribute("name", rest.getNomRestaurant());
         return "redirect:/showRest/{name}";
+    }
+
+
+    @PostMapping("/login")
+    public String login(@Valid @ModelAttribute("usr") Usuari usr, Errors errors, Model model, RedirectAttributes redirectAttributes) {
+
+
+       return "";
     }
 
 }
