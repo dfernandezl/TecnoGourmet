@@ -47,20 +47,20 @@ public class DemoApplication implements CommandLineRunner {
         usuUseCases.findAll().forEach(System.out::println);
 
 
-        Reserva var = new Reserva.ReservaBuilder().usuari("Prova").data_reserva("12/10/2019").comensals(8).build();
+        //Reserva var = new Reserva.ReservaBuilder().usuari("Prova").data_reserva("12/10/2019").comensals(8).build();
         //Reserva var2 = new Reserva.ReservaBuilder().usuari("Prova2").data_reserva("12/10/2019").comensals(8).build();
 
 
-        rsvUseCases.insert(var);
+        //rsvUseCases.insert(var);
 
         //rsvUseCases.insert(var2);
 
-        System.out.println("Reserves creades i inserides");
+        //System.out.println("Reserves creades i inserides");
 
 
-        System.out.println("AQUI TENS TOTES LES RESERVES: ");
+        //System.out.println("AQUI TENS TOTES LES RESERVES: ");
 
-        rsvUseCases.findAll().forEach(System.out::println);
+        //rsvUseCases.findAll().forEach(System.out::println);
 
 
 
@@ -74,6 +74,9 @@ public class DemoApplication implements CommandLineRunner {
         restUseCases.insert(rest2);
         restUseCases.insert(rest3);
         restUseCases.insert(rest4);
+
+        Reserva var = new Reserva.ReservaBuilder().usuari("Prova").restaurant("Rest1").data_reserva("12/10/2019").comensals(8).build();
+        rsvUseCases.insert(var);
 
         System.out.println("RESTAURANTS INSERITS");
 

@@ -1,5 +1,6 @@
 package com.example.demo.WebController;
 
+import com.example.demo.Domini.LogIn;
 import com.example.demo.Domini.Reserva;
 import com.example.demo.Domini.Restaurant;
 import com.example.demo.Domini.Usuari;
@@ -130,6 +131,16 @@ public class GETWebController {
         model.addAttribute("usr", new Usuari());
         return "IniciSessio";
     }
+
+/*
+    @GetMapping("/reserves/{restaurant}")
+    public String reserves(LogIn login, Model model) {
+        model.addAttribute("usr",);
+        return "IniciSessio";
+    }
+*/
+
+
 
 
 }
