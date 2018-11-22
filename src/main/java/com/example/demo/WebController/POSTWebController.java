@@ -75,6 +75,7 @@ public class POSTWebController {
             return "newRest";
         }
 
+
         model.addAttribute("name", rest.getNomRestaurant());
 
         FileWeb.handleFileUpload(file);
@@ -93,8 +94,11 @@ public class POSTWebController {
         if(usuUseCases.validateUser(usuValidar)==null){
             return "loginNOValidated";
         }else{
+            LogIn login= new LogIn(usr.getUserName(),usr.getPassword());
             return "loginValidated";
         }
     }
 
 }
+
+

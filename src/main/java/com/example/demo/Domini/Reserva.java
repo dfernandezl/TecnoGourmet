@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Reserva {
 
-	//Falta atribut Restaurant
+	private String restaurant;
 	private String userName;
 	private String data_reserva;
 	private int comensals;
@@ -19,14 +19,23 @@ public class Reserva {
 	}
 
 	public Reserva(ReservaBuilder builder) {
+		this.restaurant=builder.restaurant;
 		this.userName=builder.userName;
 		this.data_reserva=builder.data_reserva;
 		this.comensals=builder.comensals;
-		this.presentat=0;
+		this.presentat=builder.presentat;
 		Reserva.generadorID++;
 		this.id_reserva= Reserva.generadorID;
 	}
 
+
+	public String getRestaurant(){
+		return this.restaurant;
+	}
+
+	public void setRestaurant(String restaurant){
+		this.restaurant=restaurant;
+	}
 
 	public String getUserName(){
 		return this.userName;
@@ -82,18 +91,31 @@ public class Reserva {
 
 	 public static class ReservaBuilder {
 
+		 	private String restaurant;
 		 	private String userName;
 			private String data_reserva;
 			private int comensals;
+		 	private int presentat;
 
 
 	        public ReservaBuilder() {
 	        }
 
-		 	public ReservaBuilder usuari(String userName) {
-			 	this.userName=userName;
+		 	public ReservaBuilder restaurant(String restaurant) {
+			 	this.restaurant=restaurant;
 			 	return this;
 		 	}
+
+
+			 public ReservaBuilder usuari(String userName) {
+				 this.userName=userName;
+				 return this;
+			 }
+
+			 public ReservaBuilder presentat(int presentat) {
+				 this.presentat=presentat;
+				 return this;
+			 }
 
 	        public ReservaBuilder data_reserva(String data_reserva) {
 	            this.data_reserva=data_reserva;
