@@ -63,7 +63,6 @@ public class GETWebController {
     }
 
 
-
     //usuaris
 
     @GetMapping("showUsers") //Nomes hauria de ser visible per administrador
@@ -106,7 +105,7 @@ public class GETWebController {
         model.addAttribute("rsv",this.rsvUseCases.findById(id_reserva));
         return "showReserva";
     }
-
+    
 
     //TODO: ACTUALITZAR/MODIFICAR RESERVA
 

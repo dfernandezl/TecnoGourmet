@@ -19,8 +19,6 @@ public class UsuariUseCases {
         this.usuDAO = usuDAO;
     }
 
-
-
     public void insert(Usuari usuari){
             usuDAO.insert(usuari);
     }
