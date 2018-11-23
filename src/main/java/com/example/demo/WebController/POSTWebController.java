@@ -79,7 +79,7 @@ public class POSTWebController {
         model.addAttribute("name", rest.getNomRestaurant());
 
         FileWeb.handleFileUpload(file);
-        rest.setFoto(file.getOriginalFilename()); //"src/main/resources/static"
+        rest.setFoto("/"+file.getOriginalFilename()); //"src/main/resources/static"
         restUseCases.insert(rest);
         redirectAttributes.addAttribute("name", rest.getNomRestaurant());
         return "redirect:/showRest/{name}";
