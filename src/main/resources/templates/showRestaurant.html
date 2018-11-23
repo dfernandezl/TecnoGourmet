@@ -56,22 +56,25 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 		<h4><a href="/llistaReserves">Mira les Reserves</a></h4>
 	</div>
 </div>
+
   </div>
 </nav>
 
 <!-- DESCRIPCIO RESTAURANT -->
 <div style="margin-left:300px">
 <div style="margin-left:40px"><h1 th:text="${rest.nomRestaurant}"/></div>
-
+      <div style="margin-left:600px;"><span style="font-size: 15px;">Puntuació: </span><span style="font-size:30px;color:green" th:text="${rest.puntuacio}"></span><span style="font-size:10px">/10</span></div>
 <ul>
     	<div><span><img th:src="${rest.foto}" alt="Imatge no trobada" style="width:700px;height:400px"/></span></div>
     	</br></br>
         <div><span><b>Direccio: </b></span><span th:text="${rest.direccio}"></span></div>
-        <div><span><b>Capacitat: </b></span><span th:text="${rest.capacitat}"></span></div>
         <div><span><b>Població: </b></span><span th:text="${rest.poblacio}"></span></div>
-        <div><span><b>Puntuació: </b></span><span th:text="${rest.puntuacio}"></span></div>
-        <div><span><b>Descripció: </b></span><span th:text="${rest.descripcio}"></span></div>
         <div><span><b>Numero de telefon: </b></span><span th:text="${rest.numTelefon}"></span></div>
+        <div><span><b>Informació del restaurant: </b></span></div>
+        <div>
+            <span th:text="${rest.descripcio}"></span>
+        </div>
+    
         </br>
         <h3>Comentaris</h3>
         <br><br>
