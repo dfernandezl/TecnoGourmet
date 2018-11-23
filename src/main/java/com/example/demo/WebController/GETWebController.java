@@ -1,5 +1,6 @@
 package com.example.demo.WebController;
 
+import com.example.demo.Domini.LogIn;
 import com.example.demo.Domini.Reserva;
 import com.example.demo.Domini.Restaurant;
 import com.example.demo.Domini.Usuari;
@@ -10,6 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class GETWebController {
@@ -35,9 +40,11 @@ public class GETWebController {
     //TODO: UPDATE RESTAURANT
 
 
-    @GetMapping("showRest/{name}")
+    @GetMapping("/showRest/{name}")
     public String showRest(@PathVariable String name, Model model) {
-        model.addAttribute("rest", restUsesCases.findByName(name));
+        Restaurant rest = restUsesCases.findByName(name);
+        //System.out.println("rest foto: " + rest.getFoto());
+        model.addAttribute("rest", rest);
         return "showRestaurant";
     }
 
@@ -54,7 +61,6 @@ public class GETWebController {
         model.addAttribute("restList", restUsesCases.findByPuntuacio(puntuacio));
         return "showRestPuntuacio";
     }
-
 
 
     //usuaris
@@ -82,9 +88,7 @@ public class GETWebController {
     //TODO: ACTUALITZAR USUARI
 
 
-
     //Reserves
-
 
 
     //TODO:CREAR-INSERIR RESERVA
@@ -101,9 +105,44 @@ public class GETWebController {
         model.addAttribute("rsv",this.rsvUseCases.findById(id_reserva));
         return "showReserva";
     }
-
+    
 
     //TODO: ACTUALITZAR/MODIFICAR RESERVA
+
+
+    @GetMapping("/")
+    public String showIndex(Model model){
+        model.addAttribute("restList",this.restUsesCases.findAll());
+        List<String> options= new ArrayList<>();
+        options.add("Ciutat");
+        options.add("Puntució");
+        options.add("Nom");
+        model.addAttribute("optionsList",options);
+
+        return "index";
+    }
+
+
+    //login
+
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("usr", new Usuari());
+        return "IniciSessio";
+    }
+
+/*
+    @GetMapping("/reserves/{restaurant}")
+    public String reserves(LogIn login, Model model) {
+        model.addAttribute("usr",);
+        return "IniciSessio";
+    }
+*/
+
+
+
+
+
 
 
 }

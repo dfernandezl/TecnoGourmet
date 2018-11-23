@@ -1,5 +1,6 @@
 package com.example.demo.UseCases;
 
+import com.example.demo.Domini.LogIn;
 import com.example.demo.Domini.Usuari;
 import com.example.demo.Persistence.UsuariDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,6 @@ public class UsuariUseCases {
         this.usuDAO = usuDAO;
     }
 
-
-
     public void insert(Usuari usuari){
             usuDAO.insert(usuari);
     }
@@ -33,5 +32,8 @@ public class UsuariUseCases {
     }
 
     public Usuari findByName(String name) {return usuDAO.findByName(name);}
+
+    //prova
+    public Usuari validateUser(LogIn login) {return usuDAO.validateUser(login);}
 
 }

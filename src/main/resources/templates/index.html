@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<title>TecnoGourmet</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="../static/styles.css" rel="stylesheet" type="text/css"/>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+</style>
+
+<body class="w3-light-grey w3-content" style="max-width: 2000px;">
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="w3-container">
+    <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
+      <i class="fa fa-remove"></i>
+    </a>
+    <img src="/logo.jpg" style="width:100%;" class="w3-round"><br><br>
+    <h4><a href="/newUsuari">Ets un usuari? Registra't!</a></h4>
+    <h4><a href="/newRestaurant">Ets un restaurant? Registra't!</a></h4>
+    <h4><a href="/login">Ja ets usuari? Inicia sessió!</a></h4>
+    <h4><a href="/login">Editar perfil</a></h4>
+  </div>
+</nav>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px">
+
+  <!-- Header -->
+  <header id="portfolio">
+    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+    <div class="w3-container">
+    <h1><b>TecnoRestaurants</b></h1>
+    </div>
+  </header>
+
+  <form method="POST"  action="/busqueda">
+    <div class="searchBar-where icon-search-glass" style="margin-left: 10px;margin-right:300px;margin-top: 40px">
+      <span style="font-size: 20px;">Filtar per:</span>
+      <select style="height: 60px">
+        <option value="Ciutat">Ciutat</option>
+        <option value="Puntuacio">Puntuació</option>
+        <option value="Nom">Nom</option>
+      </select>
+        <input type="text" style="width:350px;height:60px;font-size: 20px" placeholder="Introduiex un valor" role="textbox" aria-autocomplete="list" aria-haspopup="true" tabindex="1" >
+        <input type="hidden" id="idRestaurant" name="idRestaurant" autocomplete="off">
+        <button type="submit" id="button_search" tabindex="5" style="background-color: darkgrey;width:80px;height: 60px;"><span class="searchBarSubmit-content" style="color:white">Buscar</span></button>
+    </div>
+  </form>
+
+  <br/>
+  <br/>
+
+  <div class="w3-row-padding">
+    <div class="w3-third w3-container w3-margin-bottom" style="width: 900px">
+      <th:block th:each="rest : ${restList}">
+        <div style="float:left; margin-left: 5px; display:inline; width:250px;">
+          <!--<form action="#" th:action="@{/showRest}" th:object="${rest}" method="POST">-->
+            <!--<td><button type="submit"><img th:src="${rest.foto}" alt="Patata" style="width:100%;height:200px; float:left" class="w3-hover-opacity"/></button></td>-->
+          <a th:href="@{/showRest/__${rest.nomRestaurant}__}"><img th:src="${rest.foto}" alt="Patata" style="width:100%;height:200px; float:left" class="w3-hover-opacity"/></a>
+            <div class="w3-container w3-white" style="width: 250px">
+                  <td><span style="margin-left: 200px;color: green" th:text="${rest.puntuacio}">...</span></td>
+                  <td th:text="${rest.nomRestaurant}">...</td>
+                  </br>
+                  <td th:text="${rest.poblacio}">...</td>
+            </div>
+            </br>
+          <!--</form>-->
+        </div>
+      </th:block>
+    </div>
+ </div>
+
+</div>
+
+</body>
+</html>

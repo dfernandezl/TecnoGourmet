@@ -15,7 +15,7 @@ public class RestaurantDAO {
 
     private JdbcTemplate jdbcTemplate;
 
-    private final String INSERT = "insert into Restaurant (nom, password, direccio, poblacio, puntuacio, descripcio, telefon, capacitat) values(?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String INSERT = "insert into Restaurant (nom, password, direccio, poblacio, puntuacio, descripcio, telefon, capacitat, foto) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final String FIND_ALL = "select * from Restaurant";
     private final String FIND_BY_RESTAURANT_NAME = "select * from Restaurant where nom = ?";
     private final String FIND_BY_POBLACIO = "select * from Restaurant where poblacio = ?";
@@ -24,16 +24,16 @@ public class RestaurantDAO {
 
 
     private final RowMapper<Restaurant> mapper = (resultSet, i) -> {
-        return  new Restaurant.RestaurantBuilder()
-                .nomRestaurant(resultSet.getString("nom"))
-                .password(resultSet.getString("password"))
-                .direccio(resultSet.getString("direccio"))
-                .poblacio(resultSet.getString("poblacio"))
-                .puntuacio(resultSet.getInt("puntuacio"))
-                .descripcio(resultSet.getString("descripcio"))
-                .numTelefon(resultSet.getInt("telefon"))
-                .capacitat(resultSet.getInt("capacitat"))
-                .build();
+        return  new Restaurant(resultSet.getString("nom"),
+                resultSet.getString("password"),
+                resultSet.getString("direccio"),
+                resultSet.getString("poblacio"),
+                resultSet.getDouble("puntuacio"),
+                resultSet.getString("descripcio"),
+                resultSet.getInt("telefon"),
+                resultSet.getInt("capacitat"),
+                resultSet.getString("foto")
+               );
     };
 
 
@@ -50,7 +50,7 @@ public class RestaurantDAO {
     public int insert(Restaurant restaurant) {
         System.out.println(restaurant);
         return jdbcTemplate.update(INSERT, restaurant.getNomRestaurant(), restaurant.getPassword(), restaurant.getDireccio(), restaurant.getPoblacio(),
-                restaurant.getPuntuacio(),restaurant.getDescripcio(),restaurant.getNumTelefon(), restaurant.getCapacitat());
+                0,restaurant.getDescripcio(),restaurant.getNumTelefon(), restaurant.getCapacitat(), restaurant.getFoto());
     }
 
     public int update(Restaurant restaurant){

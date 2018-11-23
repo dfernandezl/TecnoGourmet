@@ -1,5 +1,6 @@
 package com.example.demo.Persistence;
 
+import com.example.demo.Domini.LogIn;
 import com.example.demo.Domini.Usuari;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,7 +19,6 @@ public class UsuariDAO {
     private final String FIND_BY_NAME= "SELECT * FROM Usuari WHERE userName= ?";
     private final String INSERT = "insert into Usuari (username, password, punts, reserves_no_presentades) values(?, ?, ?, ?)";
     private final String UPDATE_PASSWORD = "UPDATE Usuari SET password=  WHERE name= ";
-
 
     private final RowMapper<Usuari> mapper = (resultSet, i) -> {
         return new Usuari.UsuariBuilder()
@@ -52,5 +52,18 @@ public class UsuariDAO {
     public Usuari findByName(String name){
         return jdbcTemplate.queryForObject(FIND_BY_NAME,new Object[]{name},mapper);
     }
+
+
+    //prova
+
+    public Usuari validateUser(LogIn login) {
+
+        String sql = "select * from Usuari where userName='" + login.getUsername() + "' and password='" + login.getPassword()
+                + "'";
+
+        List<Usuari> users = jdbcTemplate.query(sql, mapper);
+        return users.size() > 0 ? users.get(0) : null;
+    }
+
 
 }

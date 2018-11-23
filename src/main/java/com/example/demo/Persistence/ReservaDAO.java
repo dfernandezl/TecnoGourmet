@@ -13,7 +13,7 @@ public class ReservaDAO {
 	 private JdbcTemplate jdbcTemplate;
 	 
 	 private final String FIND_ALL = "select * from Reserva";
-	 private final String INSERT = "insert into Reserva (id_reserva, username, data_reserva, comensals, presentat) values(?,?, ?, ?, ?)";
+	 private final String INSERT = "insert into Reserva (id_reserva, username, restaurant,data_reserva, comensals, presentat) values(?,?,?, ?, ?, ?)";
 	 private final String SELECT_BY_ID = "SELECT * FROM Reserva WHERE id_reserva= ?";
 	 private final String UPDATE = "UPDATE Reserva SET data_reserva= ,comensals= ,presentat= ,  WHERE id_reserva= ";
 
@@ -21,6 +21,7 @@ public class ReservaDAO {
 	 private final RowMapper<Reserva> mapper = (resultSet, i) -> {
 	        return new Reserva.ReservaBuilder()
 					.usuari(resultSet.getString("userName"))
+					.restaurant(resultSet.getString("restaurant"))
 	                .data_reserva(resultSet.getString("data_reserva"))
 	                .comensals(resultSet.getInt("comensals"))
 	                .build();
@@ -37,7 +38,7 @@ public class ReservaDAO {
 	}
 
 	public int insert(Reserva reserva) {
-		return jdbcTemplate.update(INSERT,reserva.getId_reserva(),reserva.getUserName(), reserva.getData_reserva(), reserva.getComensals(),
+		return jdbcTemplate.update(INSERT,reserva.getId_reserva(),reserva.getUserName(),reserva.getRestaurant(),reserva.getData_reserva(), reserva.getComensals(),
 				reserva.getPresentat());
 	}
 
