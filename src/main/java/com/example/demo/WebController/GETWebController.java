@@ -43,7 +43,7 @@ public class GETWebController {
     @GetMapping("/showRest/{name}")
     public String showRest(@PathVariable String name, Model model) {
         Restaurant rest = restUsesCases.findByName(name);
-        System.out.println("rest foto: " + rest.getFoto());
+        //System.out.println("rest foto: " + rest.getFoto());
         model.addAttribute("rest", rest);
         return "showRestaurant";
     }
@@ -138,6 +138,9 @@ public class GETWebController {
         return "IniciSessio";
     }
 */
+
+
+
 
 
 
