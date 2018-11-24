@@ -1,9 +1,8 @@
 package com.example.demo.UseCases;
 
-import com.example.demo.Domini.LogIn;
+import com.example.demo.LogIn.LogIn;
 import com.example.demo.Domini.Usuari;
 import com.example.demo.Persistence.UsuariDAO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

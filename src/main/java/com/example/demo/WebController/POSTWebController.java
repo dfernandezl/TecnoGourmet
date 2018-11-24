@@ -1,6 +1,9 @@
 package com.example.demo.WebController;
 
 import com.example.demo.Domini.*;
+import com.example.demo.FiltreIndex.Filtre;
+import com.example.demo.LogIn.LogIn;
+import com.example.demo.UploadImage.FileWeb;
 import com.example.demo.UseCases.ReservaUseCases;
 import com.example.demo.UseCases.RestaurantUseCases;
 import com.example.demo.UseCases.UsuariUseCases;
@@ -98,6 +101,33 @@ public class POSTWebController {
             return "loginValidated";
         }
     }
+
+    @RequestMapping(value="/busqueda",method = RequestMethod.POST)
+    public String busqueda(@Valid @ModelAttribute("p") Filtre p, Errors errors, Model model, RedirectAttributes redirectAttributes) {
+
+       switch(p.getOpcio()){
+
+           case "Puntuacio":
+               try{
+                   double valor=Double.parseDouble(p.getValor());
+                   redirectAttributes.addAttribute("valor", valor);
+                   return "redirect:/puntuacio/{valor}";
+               }catch(NumberFormatException ex){
+                    return "redirect:/";
+               }
+
+           case "Ciutat":
+               redirectAttributes.addAttribute("valor", p.getValor());
+               return "redirect:/ciutat/{valor}";
+
+           case "Nom":
+               redirectAttributes.addAttribute("valor", p.getValor());
+               return "redirect:/nom/{valor}";
+
+       }
+        return "redirect:/";
+    }
+
 
 }
 

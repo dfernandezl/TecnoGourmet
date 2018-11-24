@@ -1,4 +1,4 @@
-package com.example.demo.Domini;
+package com.example.demo.LogIn;
 
 public class LogIn {
 

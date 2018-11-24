@@ -73,17 +73,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     </div>
   </header>
 
-  <form method="POST"  action="/busqueda">
+  <form method="POST"  action="/busqueda" th:object="${p}">
     <div class="searchBar-where icon-search-glass" style="margin-left: 10px;margin-right:300px;margin-top: 40px">
       <span style="font-size: 20px;">Filtar per:</span>
-      <select style="height: 60px">
-        <option value="Ciutat">Ciutat</option>
+      <select name="opcions" th:field="*{opcio}" style="height: 60px">
+        <option value="Ciutat" >Ciutat</option>
         <option value="Puntuacio">Puntuació</option>
         <option value="Nom">Nom</option>
       </select>
-        <input type="text" style="width:350px;height:60px;font-size: 20px" placeholder="Introduiex un valor" role="textbox" aria-autocomplete="list" aria-haspopup="true" tabindex="1" >
-        <input type="hidden" id="idRestaurant" name="idRestaurant" autocomplete="off">
-        <button type="submit" id="button_search" tabindex="5" style="background-color: darkgrey;width:80px;height: 60px;"><span class="searchBarSubmit-content" style="color:white">Buscar</span></button>
+        <input type="text" style="width:350px;height:60px;font-size: 20px" th:field="*{valor}" placeholder="Introduiex un valor" role="textbox" aria-autocomplete="list" aria-haspopup="true" tabindex="1" >
+        <!--<input type="hidden"  id="idRestaurant" name="idRestaurant">-->
+        <button type="submit"  id="button_search" tabindex="5" style="background-color: darkgrey;width:80px;height: 60px;"><span class="searchBarSubmit-content" style="color:white">Buscar</span></button>
     </div>
   </form>
 

@@ -12,7 +12,7 @@ CREATE TABLE Restaurant(
     password varchar (255),
     direccio VARCHAR(255),
     poblacio VARCHAR(255),
-    puntuacio INT,
+    puntuacio DOUBLE,
     descripcio varchar(255),
     telefon INT,
     capacitat INT,
