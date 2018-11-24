@@ -1,8 +1,7 @@
 package com.example.demo.Persistence;
 
-import com.example.demo.Domini.LogIn;
+import com.example.demo.LogIn.LogIn;
 import com.example.demo.Domini.Usuari;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;

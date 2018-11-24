@@ -38,7 +38,7 @@ public class RestaurantUseCases {
         return restDAO.findByName(nom);
     }
 
-    public List<Restaurant> findByPuntuacio(int puntuacio) {
+    public List<Restaurant> findByPuntuacio(double puntuacio) {
         return restDAO.findByPuntuacio(puntuacio);
     }
 }

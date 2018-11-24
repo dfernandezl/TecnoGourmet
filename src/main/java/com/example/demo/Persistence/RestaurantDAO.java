@@ -67,7 +67,7 @@ public class RestaurantDAO {
         return jdbcTemplate.queryForObject(FIND_BY_RESTAURANT_NAME, new Object[]{nom},mapper);
     }
 
-    public List<Restaurant> findByPuntuacio(int puntuacio) {
+    public List<Restaurant> findByPuntuacio(double puntuacio) {
         //instead of using the rowMapper it uses the BeanPropertyRowMapper to fo it authomatically
         return jdbcTemplate.query(FIND_BY_PUNTUACIO, new Object[]{puntuacio},mapper);
     }

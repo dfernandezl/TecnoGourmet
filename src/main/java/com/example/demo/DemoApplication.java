@@ -35,7 +35,7 @@ public class DemoApplication implements CommandLineRunner {
     public void run(String... strings) throws Exception {
     	//una prova simplement
 
-        Usuari aux = new Usuari.UsuariBuilder().userName("Prova").password("password").build();
+        Usuari aux = new Usuari.UsuariBuilder().userName("Filtre").password("password").build();
         Usuari aux2 = new Usuari.UsuariBuilder().userName("Prova2").password("password").build();
 
         usuUseCases.insert(aux);
@@ -47,7 +47,7 @@ public class DemoApplication implements CommandLineRunner {
         usuUseCases.findAll().forEach(System.out::println);
 
 
-        //Reserva var = new Reserva.ReservaBuilder().usuari("Prova").data_reserva("12/10/2019").comensals(8).build();
+        //Reserva var = new Reserva.ReservaBuilder().usuari("Filtre").data_reserva("12/10/2019").comensals(8).build();
         //Reserva var2 = new Reserva.ReservaBuilder().usuari("Prova2").data_reserva("12/10/2019").comensals(8).build();
 
 
@@ -75,7 +75,7 @@ public class DemoApplication implements CommandLineRunner {
         restUseCases.insert(rest3);
         restUseCases.insert(rest4);
 
-        Reserva var = new Reserva.ReservaBuilder().usuari("Prova").restaurant("Rest1").data_reserva("12/10/2019").comensals(8).build();
+        Reserva var = new Reserva.ReservaBuilder().usuari("Filtre").restaurant("Rest1").data_reserva("12/10/2019").comensals(8).build();
         rsvUseCases.insert(var);
 
         System.out.println("RESTAURANTS INSERITS");
