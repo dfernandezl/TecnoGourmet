@@ -42,29 +42,7 @@ public class GETWebController {
         return "showRestaurant";
     }
 
-
-    @GetMapping("showRestaurantPoblacio/{poblacio}")
-    public String showRestByPoblacio(@PathVariable String poblacio, Model model) {
-        model.addAttribute("restList", restUsesCases.findByPoblacio(poblacio));
-        return "showRestPoblacio";
-    }
-
-
-    @GetMapping("showRestaurantPuntuacio/{puntuacio}")
-    public String showRestByPuntuacio(@PathVariable int puntuacio, Model model) {
-        model.addAttribute("restList", restUsesCases.findByPuntuacio(puntuacio));
-        return "showRestPuntuacio";
-    }
-
-
     //usuaris
-
-    @GetMapping("showUsers") //Nomes hauria de ser visible per administrador
-    public String showUsers(Model model) {
-
-        model.addAttribute("ListUsers", usuUseCases.findAll());
-        return "showUsuaris";
-    }
 
     @GetMapping("/newUsuari")
     public String createUsuari(Model model) {
@@ -142,6 +120,11 @@ public class GETWebController {
         model.addAttribute("p", new Filtre());
         return "index";
     }
+
+
+
+
+
 
 
 

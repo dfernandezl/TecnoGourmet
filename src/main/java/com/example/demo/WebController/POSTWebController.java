@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.sql.SQLOutput;
 
 @Controller
 public class POSTWebController {
@@ -82,7 +83,7 @@ public class POSTWebController {
         model.addAttribute("name", rest.getNomRestaurant());
 
         FileWeb.handleFileUpload(file);
-        rest.setFoto("/"+file.getOriginalFilename()); //"src/main/resources/static"
+        rest.setFoto("/"+file.getOriginalFilename());
         restUseCases.insert(rest);
         redirectAttributes.addAttribute("name", rest.getNomRestaurant());
         return "redirect:/showRest/{name}";
@@ -123,9 +124,19 @@ public class POSTWebController {
            case "Nom":
                redirectAttributes.addAttribute("valor", p.getValor());
                return "redirect:/nom/{valor}";
-
        }
         return "redirect:/";
+    }
+
+
+    @PostMapping("puntuacio/{nom}")
+    public String puntuacio(@PathVariable String nom, @RequestParam(value="tentacles", required=true) int param1,Model model,RedirectAttributes redirectAttributes) {
+
+            //Cridar a metode use cases que cridi a metode DAO oer fer la actualització
+            //On envio l'usuari un cop ha votat?
+        this.restUseCases.puntuar(nom,param1);
+        redirectAttributes.addAttribute("name",nom);
+        return "redirect:/showRest/{name}";
     }
 
 

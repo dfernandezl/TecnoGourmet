@@ -14,6 +14,7 @@ public class Restaurant {
     public String descripcio;
     public long numTelefon;
     public  int capacitat;
+    public int nVots;
 
     public  String foto;
 
@@ -22,7 +23,7 @@ public class Restaurant {
 
     }
 
-    public  Restaurant(String nomRestaurant,String password,String direccio,String poblacio,Double puntuacio,String descripcio,long numTelefon,int capacitat,String foto) {
+    public  Restaurant(String nomRestaurant,String password,String direccio,String poblacio,Double puntuacio,String descripcio,long numTelefon,int capacitat,String foto, int nVots) {
         this.nomRestaurant = nomRestaurant;
         this.direccio =direccio;
         this.poblacio = poblacio;
@@ -31,8 +32,12 @@ public class Restaurant {
         this.numTelefon = numTelefon;
         this.capacitat= capacitat;
         this.foto=foto;
+        this.nVots=nVots;
     }
 
+    public int getnVots(){
+        return this.nVots;
+    }
 
     public String getFoto() { return foto;}
 
@@ -70,6 +75,10 @@ public class Restaurant {
 
 
 
+    public void setnVots(int nVots){
+        this.nVots=nVots;
+    }
+
     public void setFoto(String foto){ this.foto=foto; }
 
 
@@ -106,7 +115,7 @@ public class Restaurant {
     }
 
     public String toString(){
-        return "nom: "+this.nomRestaurant+", direcció: "+this.direccio+" capcitat:"+this.capacitat+", poblacio: "+ this.poblacio+", puntuacio: "+this.puntuacio+",descripcio: "+this.descripcio+", telefon: "+numTelefon+", foto:"+this.foto;
+        return "nom: "+this.nomRestaurant+", direcció: "+this.direccio+" capcitat:"+this.capacitat+", poblacio: "+ this.poblacio+", puntuacio: "+this.puntuacio+",descripcio: "+this.descripcio+", telefon: "+numTelefon+", foto:"+this.foto+",nVots:"+nVots;
     }
 
 
