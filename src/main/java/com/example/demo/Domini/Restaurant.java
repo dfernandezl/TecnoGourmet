@@ -15,7 +15,6 @@ public class Restaurant {
     public long numTelefon;
     public  int capacitat;
     public int nVots;
-
     public  String foto;
 
 
