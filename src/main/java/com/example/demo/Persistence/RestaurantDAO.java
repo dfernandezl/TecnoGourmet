@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 @Repository
@@ -22,8 +23,8 @@ public class RestaurantDAO {
     private final String FIND_BY_PUNTUACIO = "select * from Restaurant where puntuacio >= ? order by puntuacio";
 
     private final String UPDATE = "update Restaurant set puntuacio = ?, nVots= ? where nom= ?";
-    private final String GET_PUNTUACIO ="select * from Restaurant where nom= ?";
 
+    private static DecimalFormat df2 = new DecimalFormat(".##");
 
     private final RowMapper<Restaurant> mapper = (resultSet, i) -> {
         return  new Restaurant(
@@ -79,15 +80,10 @@ public class RestaurantDAO {
 
     public int puntua(String nom, int puntuacio){
 
-        Restaurant aux=puntuacioByRest(nom);
-
-        double mitjana=((aux.puntuacio*aux.nVots)+puntuacio)/(aux.nVots+1);
+        Restaurant aux=findByName(nom);
+        double mitjana=Math.floor(((aux.puntuacio*aux.nVots)+puntuacio)/(aux.nVots+1)*100)/100;
 
         return jdbcTemplate.update(UPDATE,mitjana,aux.nVots+1,nom);
-
     }
 
-    public Restaurant puntuacioByRest(String nom){
-        return jdbcTemplate.queryForObject(GET_PUNTUACIO, new Object[]{nom},mapper);
-    }
 }

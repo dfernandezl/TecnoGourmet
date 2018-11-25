@@ -132,8 +132,6 @@ public class POSTWebController {
     @PostMapping("puntuacio/{nom}")
     public String puntuacio(@PathVariable String nom, @RequestParam(value="tentacles", required=true) int param1,Model model,RedirectAttributes redirectAttributes) {
 
-            //Cridar a metode use cases que cridi a metode DAO oer fer la actualització
-            //On envio l'usuari un cop ha votat?
         this.restUseCases.puntuar(nom,param1);
         redirectAttributes.addAttribute("name",nom);
         return "redirect:/showRest/{name}";

@@ -47,8 +47,4 @@ public class RestaurantUseCases {
         restDAO.puntua(nom,puntuacio);
     }
 
-    public Restaurant getPuntuacio(String nom){
-        return restDAO.puntuacioByRest(nom);
-    }
-
 }
