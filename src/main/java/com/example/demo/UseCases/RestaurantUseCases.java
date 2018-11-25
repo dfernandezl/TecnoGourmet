@@ -41,4 +41,14 @@ public class RestaurantUseCases {
     public List<Restaurant> findByPuntuacio(double puntuacio) {
         return restDAO.findByPuntuacio(puntuacio);
     }
+
+
+    public void puntuar(String nom, int puntuacio){
+        restDAO.puntua(nom,puntuacio);
+    }
+
+    public Restaurant getPuntuacio(String nom){
+        return restDAO.puntuacioByRest(nom);
+    }
+
 }

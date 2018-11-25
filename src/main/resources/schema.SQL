@@ -16,7 +16,8 @@ CREATE TABLE Restaurant(
     descripcio varchar(255),
     telefon INT,
     capacitat INT,
-    foto varchar(255)
+    foto varchar(255),
+    nVots INT
 );
 
 

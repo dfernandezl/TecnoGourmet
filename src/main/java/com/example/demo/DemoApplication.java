@@ -65,10 +65,10 @@ public class DemoApplication implements CommandLineRunner {
 
 
         //Restaurant rest = new Restaurant("Rest1","password","C/Mossen Jaume Urgell","Parets",10.0,"Molt bo",935621020,10,"Rest1.png");
-        Restaurant rest1 = new Restaurant("Rest1","password","C/Mossen Jaume Urgell","Mollet",10.0,"Molt bo",935621020,10,"/Rest2.jpg");
-        Restaurant rest2 = new Restaurant("Rest2","password","C/Mossen Jaume Urgell","Granollers",10.0,"Molt bo",935621020,10,"/Rest3.jpg");
-        Restaurant rest3 = new Restaurant("Rest3","password","C/Mossen Jaume Urgell","Mataró",10.0,"Molt bo",935621020,10,"/Rest4.jpg");
-        Restaurant rest4 = new Restaurant("Rest4","password","C/Mossen Jaume Urgell","Paris",10.0,"Molt bo",935621020,10,"/Rest5.jpg");
+        Restaurant rest1 = new Restaurant("Rest1","password","C/Mossen Jaume Urgell","Mollet",10.0,"Molt bo",935621020,10,"/Rest2.jpg",0);
+        Restaurant rest2 = new Restaurant("Rest2","password","C/Mossen Jaume Urgell","Granollers",10.0,"Molt bo",935621020,10,"/Rest3.jpg",0);
+        Restaurant rest3 = new Restaurant("Rest3","password","C/Mossen Jaume Urgell","Mataró",10.0,"Molt bo",935621020,10,"/Rest4.jpg",0);
+        Restaurant rest4 = new Restaurant("Rest4","password","C/Mossen Jaume Urgell","Paris",10.0,"Molt bo",935621020,10,"/Rest5.jpg",0);
 
         restUseCases.insert(rest1);
         restUseCases.insert(rest2);
@@ -83,7 +83,6 @@ public class DemoApplication implements CommandLineRunner {
 
         System.out.println("AQUI TENS TOTS ELS RESTAURANTS:");
         restUseCases.findAll().forEach(System.out::println);
-
 
     }
 
