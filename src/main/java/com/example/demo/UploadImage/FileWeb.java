@@ -1,4 +1,4 @@
-package com.example.demo.Domini;
+package com.example.demo.UploadImage;
 
 
 import org.springframework.stereotype.Controller;

@@ -1,9 +1,7 @@
 package com.example.demo.WebController;
 
-import com.example.demo.Domini.LogIn;
-import com.example.demo.Domini.Reserva;
-import com.example.demo.Domini.Restaurant;
-import com.example.demo.Domini.Usuari;
+import com.example.demo.Domini.*;
+import com.example.demo.FiltreIndex.Filtre;
 import com.example.demo.UseCases.ReservaUseCases;
 import com.example.demo.UseCases.RestaurantUseCases;
 import com.example.demo.UseCases.UsuariUseCases;
@@ -11,10 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class GETWebController {
@@ -48,29 +42,7 @@ public class GETWebController {
         return "showRestaurant";
     }
 
-
-    @GetMapping("showRestaurantPoblacio/{poblacio}")
-    public String showRestByPoblacio(@PathVariable String poblacio, Model model) {
-        model.addAttribute("restList", restUsesCases.findByPoblacio(poblacio));
-        return "showRestPoblacio";
-    }
-
-
-    @GetMapping("showRestaurantPuntuacio/{puntuacio}")
-    public String showRestByPuntuacio(@PathVariable int puntuacio, Model model) {
-        model.addAttribute("restList", restUsesCases.findByPuntuacio(puntuacio));
-        return "showRestPuntuacio";
-    }
-
-
     //usuaris
-
-    @GetMapping("showUsers") //Nomes hauria de ser visible per administrador
-    public String showUsers(Model model) {
-
-        model.addAttribute("ListUsers", usuUseCases.findAll());
-        return "showUsuaris";
-    }
 
     @GetMapping("/newUsuari")
     public String createUsuari(Model model) {
@@ -114,12 +86,7 @@ public class GETWebController {
     @GetMapping("/")
     public String showIndex(Model model){
         model.addAttribute("restList",this.restUsesCases.findAll());
-        List<String> options= new ArrayList<>();
-        options.add("Ciutat");
-        options.add("Puntució");
-        options.add("Nom");
-        model.addAttribute("optionsList",options);
-
+        model.addAttribute("p", new Filtre());
         return "index";
     }
 
@@ -132,13 +99,29 @@ public class GETWebController {
         return "IniciSessio";
     }
 
-/*
-    @GetMapping("/reserves/{restaurant}")
-    public String reserves(LogIn login, Model model) {
-        model.addAttribute("usr",);
-        return "IniciSessio";
+
+
+    @GetMapping("/puntuacio/{valor}")
+    public String showPuntuacio(@PathVariable double valor,Model model){
+        model.addAttribute("restList",this.restUsesCases.findByPuntuacio(valor));
+        model.addAttribute("p", new Filtre());
+        return "index";
     }
-*/
+
+    @GetMapping("/nom/{valor}")
+    public String showNom(@PathVariable String valor,Model model){
+        model.addAttribute("restList",this.restUsesCases.findByName(valor));
+        model.addAttribute("p", new Filtre());
+        return "index";
+    }
+
+    @GetMapping("/ciutat/{valor}")
+    public String showCiutat(@PathVariable String valor,Model model){
+        model.addAttribute("restList",this.restUsesCases.findByPoblacio(valor));
+        model.addAttribute("p", new Filtre());
+        return "index";
+    }
+
 
 
 

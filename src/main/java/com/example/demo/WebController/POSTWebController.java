@@ -1,6 +1,9 @@
 package com.example.demo.WebController;
 
 import com.example.demo.Domini.*;
+import com.example.demo.FiltreIndex.Filtre;
+import com.example.demo.LogIn.LogIn;
+import com.example.demo.UploadImage.FileWeb;
 import com.example.demo.UseCases.ReservaUseCases;
 import com.example.demo.UseCases.RestaurantUseCases;
 import com.example.demo.UseCases.UsuariUseCases;
@@ -12,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.sql.SQLOutput;
 
 @Controller
 public class POSTWebController {
@@ -79,7 +83,7 @@ public class POSTWebController {
         model.addAttribute("name", rest.getNomRestaurant());
 
         FileWeb.handleFileUpload(file);
-        rest.setFoto("/"+file.getOriginalFilename()); //"src/main/resources/static"
+        rest.setFoto("/"+file.getOriginalFilename());
         restUseCases.insert(rest);
         redirectAttributes.addAttribute("name", rest.getNomRestaurant());
         return "redirect:/showRest/{name}";
@@ -98,6 +102,41 @@ public class POSTWebController {
             return "loginValidated";
         }
     }
+
+    @RequestMapping(value="/busqueda",method = RequestMethod.POST)
+    public String busqueda(@Valid @ModelAttribute("p") Filtre p, Errors errors, Model model, RedirectAttributes redirectAttributes) {
+
+       switch(p.getOpcio()){
+
+           case "Puntuacio":
+               try{
+                   double valor=Double.parseDouble(p.getValor());
+                   redirectAttributes.addAttribute("valor", valor);
+                   return "redirect:/puntuacio/{valor}";
+               }catch(NumberFormatException ex){
+                    return "redirect:/";
+               }
+
+           case "Ciutat":
+               redirectAttributes.addAttribute("valor", p.getValor());
+               return "redirect:/ciutat/{valor}";
+
+           case "Nom":
+               redirectAttributes.addAttribute("valor", p.getValor());
+               return "redirect:/nom/{valor}";
+       }
+        return "redirect:/";
+    }
+
+
+    @PostMapping("puntuacio/{nom}")
+    public String puntuacio(@PathVariable String nom, @RequestParam(value="tentacles", required=true) int param1,Model model,RedirectAttributes redirectAttributes) {
+
+        this.restUseCases.puntuar(nom,param1);
+        redirectAttributes.addAttribute("name",nom);
+        return "redirect:/showRest/{name}";
+    }
+
 
 }
 

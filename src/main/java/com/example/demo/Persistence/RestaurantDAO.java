@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 @Repository
@@ -15,16 +16,19 @@ public class RestaurantDAO {
 
     private JdbcTemplate jdbcTemplate;
 
-    private final String INSERT = "insert into Restaurant (nom, password, direccio, poblacio, puntuacio, descripcio, telefon, capacitat, foto) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private final String FIND_ALL = "select * from Restaurant";
+    private final String INSERT = "insert into Restaurant (nom, password, direccio, poblacio, puntuacio, descripcio, telefon, capacitat, foto, nVots) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String FIND_ALL = "select * from Restaurant order by puntuacio DESC";
     private final String FIND_BY_RESTAURANT_NAME = "select * from Restaurant where nom = ?";
     private final String FIND_BY_POBLACIO = "select * from Restaurant where poblacio = ?";
     private final String FIND_BY_PUNTUACIO = "select * from Restaurant where puntuacio >= ? order by puntuacio";
-    private final String UPDATE = "update Restaurant set nom = ?, password= ?, direccio = ?, poblacio = ?, puntuacio = ?, descripcio= ?, telefon = ? , capacitat=?";
 
+    private final String UPDATE = "update Restaurant set puntuacio = ?, nVots= ? where nom= ?";
+
+    private static DecimalFormat df2 = new DecimalFormat(".##");
 
     private final RowMapper<Restaurant> mapper = (resultSet, i) -> {
-        return  new Restaurant(resultSet.getString("nom"),
+        return  new Restaurant(
+                resultSet.getString("nom"),
                 resultSet.getString("password"),
                 resultSet.getString("direccio"),
                 resultSet.getString("poblacio"),
@@ -32,7 +36,8 @@ public class RestaurantDAO {
                 resultSet.getString("descripcio"),
                 resultSet.getInt("telefon"),
                 resultSet.getInt("capacitat"),
-                resultSet.getString("foto")
+                resultSet.getString("foto"),
+                resultSet.getInt("nVots")
                );
     };
 
@@ -48,9 +53,9 @@ public class RestaurantDAO {
 
 
     public int insert(Restaurant restaurant) {
-        System.out.println(restaurant);
+
         return jdbcTemplate.update(INSERT, restaurant.getNomRestaurant(), restaurant.getPassword(), restaurant.getDireccio(), restaurant.getPoblacio(),
-                0,restaurant.getDescripcio(),restaurant.getNumTelefon(), restaurant.getCapacitat(), restaurant.getFoto());
+                0,restaurant.getDescripcio(),restaurant.getNumTelefon(), restaurant.getCapacitat(), restaurant.getFoto(),0);
     }
 
     public int update(Restaurant restaurant){
@@ -67,8 +72,18 @@ public class RestaurantDAO {
         return jdbcTemplate.queryForObject(FIND_BY_RESTAURANT_NAME, new Object[]{nom},mapper);
     }
 
-    public List<Restaurant> findByPuntuacio(int puntuacio) {
+    public List<Restaurant> findByPuntuacio(double puntuacio) {
         //instead of using the rowMapper it uses the BeanPropertyRowMapper to fo it authomatically
         return jdbcTemplate.query(FIND_BY_PUNTUACIO, new Object[]{puntuacio},mapper);
     }
+
+
+    public int puntua(String nom, int puntuacio){
+
+        Restaurant aux=findByName(nom);
+        double mitjana=Math.floor(((aux.puntuacio*aux.nVots)+puntuacio)/(aux.nVots+1)*100)/100;
+
+        return jdbcTemplate.update(UPDATE,mitjana,aux.nVots+1,nom);
+    }
+
 }
