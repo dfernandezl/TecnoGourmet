@@ -8,22 +8,53 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="../static/styles.css" rel="stylesheet" type="text/css"/>
 <style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+  body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+  .menu {
+    background-color: #eee;
+    color: #444;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+  }
+  .active, .menu:hover {
+    background-color: #ccc;
+  }
+  .panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+  }
 </style>
 
 <body class="w3-light-grey w3-content" style="max-width: 2000px;">
 
-<!-- Sidebar/menu -->
+<!-- MENÚ -->
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
   <div class="w3-container">
     <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
       <i class="fa fa-remove"></i>
     </a>
     <a href="/"><img src="/logo.jpg" style="width:100%;" class="w3-round"></a><br><br>
-    <h4><a href="/newUsuari">Ets un usuari? Registra't!</a></h4>
-    <h4><a href="/newRestaurant">Ets un restaurant? Registra't!</a></h4>
-    <h4><a href="/login">Ja ets usuari? Inicia sessió!</a></h4>
-    <h4><a href="/login">Editar perfil</a></h4>
+    <button class="menu">Ja ets usuari?</button>
+    <div class="panel">
+      <h4><a href="/newUsuari">Registra't!</a></h4>
+      <h4><a href="/login">Inicia sessió!</a></h4>
+      <h4><a href="/llistaReserves">Mira les Reserves</a></h4>
+    </div>
+    <button class="menu">Ets un Restaurant?</button>
+    <div class="panel">
+      <h4><a href="/newRestaurant">Registra't!</a></h4>
+      <h4><a href="/updateRestaurant">Modifica Restaurant!</a></h4>
+      <h4><a href="/llistaReserves">Mira les Reserves</a></h4>
+    </div>
+  </div>
   </div>
 </nav>
 
@@ -49,7 +80,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         <option value="Puntuacio">Puntuació</option>
         <option value="Nom">Nom</option>
       </select>
-        <input type="text" style="width:350px;height:60px;font-size: 20px" th:field="*{valor}" name="valor" placeholder="Introduiex un valor" role="textbox" aria-autocomplete="list" aria-haspopup="true" tabindex="1" >
+        <input type="text" style="width:350px;height:60px;font-size: 20px" th:field="*{valor}" name="valor" placeholder="Introduiex un valor" role="textbox" aria-autocomplete="list" aria-haspopup="true" tabindex="1" required>
         <button type="submit"  id="button_search" tabindex="5" style="background-color: darkgrey;width:80px;height: 60px;"><span class="searchBarSubmit-content" style="color:white">Buscar</span></button>
     </div>
   </form>
@@ -78,6 +109,23 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
  </div>
 
 </div>
+
+<!-- Script del Menú -->
+<script>
+    var acc = document.getElementsByClassName("menu");
+    var i;
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight){
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
+    }
+</script>
 
 </body>
 </html>
