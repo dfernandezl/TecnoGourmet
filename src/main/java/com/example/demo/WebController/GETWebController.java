@@ -65,8 +65,9 @@ public class GETWebController {
 
     //TODO:CREAR-INSERIR RESERVA
 
-    @GetMapping("/newReserva")
-    public String createResrva(Model model) {
+    @GetMapping("/newReserva/{nom}")
+    public String createReserva(@PathVariable String nom, Model model) {
+        Restaurant rest = restUsesCases.findByName(nom);
         model.addAttribute("rsv", new Reserva());
         return "newReserva";
     }
