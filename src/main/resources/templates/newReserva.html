@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Create Restaurant</title>
-    <style type="text/css">
-        .error {
-            color: red;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <title>Nova Reserva</title>
+    <link href="/styles.css" rel="stylesheet" type="text/css"/>
 </head>
+
 <body>
 
-<div align="center">
-
-    <h1>Make a reservation</h1>
-
+<div id="registration-form">
+    <div class='fieldset'>
+        <legend>Nova Reserva</legend>
+        <div align="center"><img src="/logo.jpg" style="width:80%; height: 100%; margin-left: 5px; margin-top: 20px" class="w3-round"><br><br> </div>
     <form action="#" th:action="@{/newResv}" th:object="${rsv}" method="POST">
         <div align="left" class="errors" th:if="${#fields.hasErrors('*')}">
             <ul>
@@ -30,7 +28,7 @@
             </tr>
             <tr>
                 <td><label th:class="${#fields.hasErrors('data_reserva')}? 'error'">Data Reserva</label>:</td>
-                <td><input type="text" th:field="*{data_reserva}"
+                <td><input type="date" th:field="*{data_reserva}"
                            th:class="${#fields.hasErrors('data_reserva')}? 'error'"/></td>
             </tr>
             <tr>

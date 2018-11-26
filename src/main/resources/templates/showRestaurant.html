@@ -35,7 +35,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         <div><span><b>Numero de telefon: </b></span><span th:text="${rest.numTelefon}"></span></div>
         </br>
 
-        <a href="/newReserva">
+        <a th:href="@{/newReserva/__${rest.nomRestaurant}__}">
             <input type="button" value="Reservar" />
         </a>
 
