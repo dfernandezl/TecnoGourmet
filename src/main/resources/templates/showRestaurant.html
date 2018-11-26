@@ -82,6 +82,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
             <button type="submit">Enviar</button>
         </form>
         </br>
+
+        <a th:href="@{/newReserva/__${rest.nomRestaurant}__}">
+            <input type="button" value="Reservar" />
+        </a>
+
         <h3>Comentaris</h3>
         <br><br>
         <h3>Deixa la teva opinió</h3>
