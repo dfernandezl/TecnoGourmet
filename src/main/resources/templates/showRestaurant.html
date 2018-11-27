@@ -76,16 +76,16 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         </div>
         </br>
 
+        <a th:href="@{/newReserva/__${rest.nomRestaurant}__}">
+            <input type="button" value="Reservar" />
+        </a>
+
         <form method="POST" th:action="@{/puntuacio/__${rest.nomRestaurant}__}" >
             <h3>Puntua aquest restaurant</h3>
             <input type="number" id="tentacles" name="tentacles" min="0" max="10">
             <button type="submit">Enviar</button>
         </form>
         </br>
-
-        <a th:href="@{/newReserva/__${rest.nomRestaurant}__}">
-            <input type="button" value="Reservar" />
-        </a>
 
         <h3>Comentaris</h3>
         <br><br>

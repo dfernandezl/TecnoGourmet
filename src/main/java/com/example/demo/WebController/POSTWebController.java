@@ -7,6 +7,7 @@ import com.example.demo.UploadImage.FileWeb;
 import com.example.demo.UseCases.ReservaUseCases;
 import com.example.demo.UseCases.RestaurantUseCases;
 import com.example.demo.UseCases.UsuariUseCases;
+import com.example.demo.DisponibilitatReserva.ValidarReserva;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -15,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.sql.SQLOutput;
+
 
 @Controller
 public class POSTWebController {
@@ -52,8 +53,9 @@ public class POSTWebController {
             return "redirect:/showUser/{name}";
         }
 
+
     @PostMapping("/newResv")
-    public String createReservation(@Valid @ModelAttribute("rsv") Reserva rsv, Errors errors, Model model, RedirectAttributes redirectAttributes) {
+    public String createReservation(@Valid @ModelAttribute("rsv") Reserva rsv,@RequestParam("paramName") String nom,Errors errors, Model model, RedirectAttributes redirectAttributes) {
 
         if (errors.hasErrors()) {
             model.addAttribute("rsv", rsv);
@@ -61,13 +63,17 @@ public class POSTWebController {
             return "newReserva";
         }
 
-        model.addAttribute("id_reserva", rsv.getId_reserva());
-
-        rsvUseCases.insert(rsv);
-
-        redirectAttributes.addAttribute("id_reserva", rsv.getId_reserva());
-
-        return "redirect:/showRsv/{id_reserva}";
+        rsv.setRestaurant(nom);
+        ValidarReserva var = new ValidarReserva(rsvUseCases, restUseCases);
+        if(var.dataValida(rsv.getData_reserva())) {
+            if (var.suficientCapacitat(rsv)) {
+                rsvUseCases.insert(rsv);
+                redirectAttributes.addAttribute("id_reserva", rsv.getId_reserva());
+                return "redirect:/showRsv/{id_reserva}";
+            }
+            return "showNOreserva";
+        }
+            return "ReservaNOvalida";
     }
 
 
@@ -136,7 +142,6 @@ public class POSTWebController {
         redirectAttributes.addAttribute("name",nom);
         return "redirect:/showRest/{name}";
     }
-
 
 }
 

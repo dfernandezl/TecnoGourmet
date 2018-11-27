@@ -22,6 +22,8 @@ public class RestaurantDAO {
     private final String FIND_BY_POBLACIO = "select * from Restaurant where poblacio = ?";
     private final String FIND_BY_PUNTUACIO = "select * from Restaurant where puntuacio >= ? order by puntuacio";
 
+
+
     private final String UPDATE = "update Restaurant set puntuacio = ?, nVots= ? where nom= ?";
 
     private static DecimalFormat df2 = new DecimalFormat(".##");
@@ -85,5 +87,10 @@ public class RestaurantDAO {
 
         return jdbcTemplate.update(UPDATE,mitjana,aux.nVots+1,nom);
     }
+
+
+
+
+
 
 }

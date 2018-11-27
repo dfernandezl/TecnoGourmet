@@ -13,18 +13,21 @@ public class ReservaDAO {
 	 private JdbcTemplate jdbcTemplate;
 	 
 	 private final String FIND_ALL = "select * from Reserva";
-	 private final String INSERT = "insert into Reserva (id_reserva, username, restaurant,data_reserva, comensals, presentat) values(?,?,?, ?, ?, ?)";
+	 private final String INSERT = "insert into Reserva (id_reserva, username, restaurant,data_reserva, comensals, presentat, torn) values(?,?,?, ?, ?, ?, ?)";
 	 private final String SELECT_BY_ID = "SELECT * FROM Reserva WHERE id_reserva= ?";
-	 private final String UPDATE = "UPDATE Reserva SET data_reserva= ,comensals= ,presentat= ,  WHERE id_reserva= ";
+	 private final String UPDATE = "UPDATE Reserva SET data_reserva= ,comensals= ,presentat= , torn=  WHERE id_reserva= ";
 
+	 private final String GET_Comensals = "SELECT * from Reserva where restaurant= ? AND data_reserva= ? AND torn= ?";
 
 	 private final RowMapper<Reserva> mapper = (resultSet, i) -> {
-	        return new Reserva.ReservaBuilder()
-					.usuari(resultSet.getString("userName"))
-					.restaurant(resultSet.getString("restaurant"))
-	                .data_reserva(resultSet.getString("data_reserva"))
-	                .comensals(resultSet.getInt("comensals"))
-	                .build();
+	        return new Reserva(
+	        		resultSet.getInt("id_reserva"),
+					resultSet.getString("userName"),
+					resultSet.getString("restaurant"),
+	                resultSet.getString("data_reserva"),
+	                resultSet.getInt("comensals"),
+					resultSet.getInt("presentat"),
+					resultSet.getInt("torn"));
 	 };
 
 
@@ -38,19 +41,24 @@ public class ReservaDAO {
 	}
 
 	public int insert(Reserva reserva) {
+		reserva.generarId();
 		return jdbcTemplate.update(INSERT,reserva.getId_reserva(),reserva.getUserName(),reserva.getRestaurant(),reserva.getData_reserva(), reserva.getComensals(),
-				reserva.getPresentat());
+				reserva.getPresentat(),reserva.getTorn());
 	}
 
 
 	public int update(Reserva reserva){
-		return jdbcTemplate.update(UPDATE,reserva.getId_reserva(),reserva.getData_reserva(),reserva.getComensals(),reserva.getPresentat(),reserva.getId_reserva());
+		return jdbcTemplate.update(UPDATE,reserva.getId_reserva(),reserva.getData_reserva(),reserva.getComensals(),reserva.getPresentat(),reserva.getId_reserva(),reserva.getTorn());
 	}
 
 	public Reserva findById(int id){
-		return jdbcTemplate.queryForObject(SELECT_BY_ID, new Object[]{id} , mapper);
+		Reserva a= jdbcTemplate.queryForObject(SELECT_BY_ID, new Object[]{id} , mapper);
+		return a;
 	}
 
+	public List<Reserva> capacitatReservada(String nom,int torn,String data){
+		return jdbcTemplate.query(GET_Comensals,new Object[]{nom,data,torn},mapper);
+	}
 
 
 
