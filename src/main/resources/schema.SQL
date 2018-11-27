@@ -29,6 +29,7 @@ CREATE TABLE Reserva(
   data_reserva VARCHAR(255),
   comensals INT,
   presentat INT,
+  torn INT,
   CONSTRAINT FK_USUARI FOREIGN KEY (userName) REFERENCES Usuari(userName),
   CONSTRAINT FK_RESTAURANT FOREIGN KEY (restaurant) REFERENCES Restaurant(nom)
 );

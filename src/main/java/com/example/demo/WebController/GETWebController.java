@@ -67,7 +67,7 @@ public class GETWebController {
 
     @GetMapping("/newReserva/{nom}")
     public String createReserva(@PathVariable String nom, Model model) {
-        Restaurant rest = restUsesCases.findByName(nom);
+        model.addAttribute("nom",nom);
         model.addAttribute("rsv", new Reserva());
         return "newReserva";
     }
@@ -75,7 +75,8 @@ public class GETWebController {
 
     @GetMapping("/showRsv/{id_reserva}")
     public String showreserva(@PathVariable int id_reserva, Model model){
-        model.addAttribute("rsv",this.rsvUseCases.findById(id_reserva));
+        Reserva rsv=this.rsvUseCases.findById(id_reserva);
+        model.addAttribute("rsv",rsv);
         return "showReserva";
     }
     
