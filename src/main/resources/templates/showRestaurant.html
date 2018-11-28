@@ -88,12 +88,24 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         </br>
 
         <h3>Comentaris</h3>
+        <th:block th:each="comt : ${ListComt}">
+            <div style="margin-left: 5px; width:450px;">
+                <div class="w3-container w3-white" style="width: 250px">
+                    <td><span th:text="${comt.getUsuari()}">...</span></td>
+                    </br>
+                    <td th:text="${comt.getText()}">...</td>
+                </div>
+                </br>
+            </div>
+        </th:block>
+
         <br><br>
         <h3>Deixa la teva opinió</h3>
-        <form action="/action_page.php" method="POST">
-            <input type="text" name="lname" placeholder="Usuari"/>
+        <form th:action="@{/comentari}" th:object="${coment}" method="POST">
+            <input type="hidden" name="nomRest"  th:value="${rest.nomRestaurant}"/>
+            <input type="text" th:field="*{usuari}" placeholder="Usuari"/>
             </br> </br>
-            <textarea type="text" name="fname" placeholder="Deixa aqui la teva opinio" rows="8" cols="100"></textarea>
+            <textarea type="text" th:field="*{text}" placeholder="Deixa aqui la teva opinio" rows="8" cols="100"></textarea>
             </br>
             <input type="submit" value="Enviar">
         </form>
