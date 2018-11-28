@@ -3,6 +3,7 @@ package com.example.demo;
 import com.example.demo.Domini.Reserva;
 import com.example.demo.Domini.Restaurant;
 import com.example.demo.Domini.Usuari;
+import com.example.demo.UseCases.ComentariUseCases;
 import com.example.demo.UseCases.ReservaUseCases;
 import com.example.demo.UseCases.RestaurantUseCases;
 import com.example.demo.UseCases.UsuariUseCases;
@@ -27,6 +28,9 @@ public class DemoApplication implements CommandLineRunner {
 
     @Autowired
     private RestaurantUseCases restUseCases;
+
+    @Autowired
+    private ComentariUseCases cmtUseCases;
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
