@@ -47,4 +47,8 @@ public class RestaurantUseCases {
         restDAO.puntua(nom,puntuacio);
     }
 
+
+
+
+
 }

@@ -11,6 +11,7 @@ public class Reserva {
 	private int comensals;
 	private int presentat;
 	private int id_reserva;
+	private int torn;
 
 	private static int generadorID=0;
 
@@ -18,16 +19,28 @@ public class Reserva {
 
 	}
 
-	public Reserva(ReservaBuilder builder) {
-		this.restaurant=builder.restaurant;
-		this.userName=builder.userName;
-		this.data_reserva=builder.data_reserva;
-		this.comensals=builder.comensals;
-		this.presentat=builder.presentat;
-		Reserva.generadorID++;
-		this.id_reserva= Reserva.generadorID;
+	public Reserva(int id_reserva,String userName,String restaurant,String data_reserva,int comensals,int presentat,int torn) {
+		this.id_reserva=id_reserva;
+		this.restaurant=restaurant;
+		this.userName=userName;
+		this.data_reserva=data_reserva;
+		this.comensals=comensals;
+		this.presentat=presentat;
+		this.torn=torn;
 	}
 
+	public void generarId(){
+		this.id_reserva=generadorID++;
+	}
+
+
+	public int getTorn(){
+		return this.torn;
+	}
+
+	public void setTorn(int torn) {
+		this.torn = torn;
+	}
 
 	public String getRestaurant(){
 		return this.restaurant;
@@ -88,49 +101,4 @@ public class Reserva {
 				", id de la reserva ='" + this.id_reserva + '\'' +
 				'}';
 	}
-
-	 public static class ReservaBuilder {
-
-		 	private String restaurant;
-		 	private String userName;
-			private String data_reserva;
-			private int comensals;
-		 	private int presentat;
-
-
-	        public ReservaBuilder() {
-	        }
-
-		 	public ReservaBuilder restaurant(String restaurant) {
-			 	this.restaurant=restaurant;
-			 	return this;
-		 	}
-
-
-			 public ReservaBuilder usuari(String userName) {
-				 this.userName=userName;
-				 return this;
-			 }
-
-			 public ReservaBuilder presentat(int presentat) {
-				 this.presentat=presentat;
-				 return this;
-			 }
-
-	        public ReservaBuilder data_reserva(String data_reserva) {
-	            this.data_reserva=data_reserva;
-	            return this;
-	        }
-
-	        public ReservaBuilder comensals(int comensals) {
-	            this.comensals=comensals;
-	            return this;
-	        }
-
-
-	        public Reserva build() {
-	            return new Reserva(this);
-	        }
-
-	    }
 }

@@ -2,6 +2,7 @@ package com.example.demo.WebController;
 
 import com.example.demo.Domini.*;
 import com.example.demo.FiltreIndex.Filtre;
+import com.example.demo.UseCases.ComentariUseCases;
 import com.example.demo.UseCases.ReservaUseCases;
 import com.example.demo.UseCases.RestaurantUseCases;
 import com.example.demo.UseCases.UsuariUseCases;
@@ -10,17 +11,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.List;
+
 @Controller
 public class GETWebController {
 
     private RestaurantUseCases restUsesCases;
     private UsuariUseCases usuUseCases;
     private ReservaUseCases rsvUseCases;
+    private ComentariUseCases cmtUseCases;
 
-    public GETWebController(RestaurantUseCases restUsesCases,UsuariUseCases usuUseCases,ReservaUseCases rsvUseCases) {
+    public GETWebController(RestaurantUseCases restUsesCases,UsuariUseCases usuUseCases,ReservaUseCases rsvUseCases,ComentariUseCases cmtUseCases) {
         this.restUsesCases = restUsesCases;
         this.usuUseCases=usuUseCases;
         this.rsvUseCases= rsvUseCases;
+        this.cmtUseCases=cmtUseCases;
     }
 
     //Restaurants
@@ -37,7 +42,11 @@ public class GETWebController {
     @GetMapping("/showRest/{name}")
     public String showRest(@PathVariable String name, Model model) {
         Restaurant rest = restUsesCases.findByName(name);
-        //System.out.println("rest foto: " + rest.getFoto());
+        List<Comentari> var= this.cmtUseCases.findByRestaurant(name);
+        if(var!=null){
+            model.addAttribute("ListComt",var);
+        }
+        model.addAttribute("coment",new Comentari());
         model.addAttribute("rest", rest);
         return "showRestaurant";
     }
@@ -67,7 +76,7 @@ public class GETWebController {
 
     @GetMapping("/newReserva/{nom}")
     public String createReserva(@PathVariable String nom, Model model) {
-        Restaurant rest = restUsesCases.findByName(nom);
+        model.addAttribute("nom",nom);
         model.addAttribute("rsv", new Reserva());
         return "newReserva";
     }
@@ -75,10 +84,11 @@ public class GETWebController {
 
     @GetMapping("/showRsv/{id_reserva}")
     public String showreserva(@PathVariable int id_reserva, Model model){
-        model.addAttribute("rsv",this.rsvUseCases.findById(id_reserva));
+        Reserva rsv=this.rsvUseCases.findById(id_reserva);
+        model.addAttribute("rsv",rsv);
         return "showReserva";
     }
-    
+
 
     //TODO: ACTUALITZAR/MODIFICAR RESERVA
 

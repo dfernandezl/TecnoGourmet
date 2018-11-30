@@ -15,19 +15,7 @@
         <form action="#" th:action="@{/}"  method="GET">
             <table>
                 <tr>
-                    <td><b>Usuari: </b><span th:text="${rsv.userName}"></span></td>
-                </tr>
-                <tr>
-                    <td><b>Restaurant: </b><span th:text="${rsv.restaurant}"></span></td>
-                </tr>
-                <tr>
-                    <td><b>Data: </b><span th:text="${rsv.data_reserva}"></span></td>
-                </tr>
-                <tr>
-                    <td><b>Torn: </b><span th:text="${rsv.torn}"></span></td>
-                </tr>
-                <tr>
-                    <td><b>Comensals: </b><span th:text="${rsv.comensals}"></span></td>
+                    <td><span>Ho sentim no hi ha disponibilitat en aquest restaurant per aquesta data i aquest torn.</span></td>
                 </tr>
             </table>
             <input type="submit" value="Pàgina d'inici">

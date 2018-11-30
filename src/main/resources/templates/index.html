@@ -92,8 +92,6 @@
     <div class="w3-third w3-container w3-margin-bottom" style="width: 900px">
       <th:block th:each="rest : ${restList}">
         <div style="float:left; margin-left: 5px; display:inline; width:250px;">
-          <!--<form action="#" th:action="@{/showRest}" th:object="${rest}" method="POST">-->
-            <!--<td><button type="submit"><img th:src="${rest.foto}" alt="Patata" style="width:100%;height:200px; float:left" class="w3-hover-opacity"/></button></td>-->
           <a th:href="@{/showRest/__${rest.nomRestaurant}__}"><img th:src="${rest.foto}" alt="Patata" style="width:100%;height:200px; float:left" class="w3-hover-opacity"/></a>
             <div class="w3-container w3-white" style="width: 250px">
                   <td><span style="margin-left: 200px;color: green" th:text="${rest.puntuacio}">...</span></td>
@@ -102,7 +100,6 @@
                   <td th:text="${rest.poblacio}">...</td>
             </div>
             </br>
-          <!--</form>-->
         </div>
       </th:block>
     </div>

@@ -3,6 +3,7 @@ package com.example.demo;
 import com.example.demo.Domini.Reserva;
 import com.example.demo.Domini.Restaurant;
 import com.example.demo.Domini.Usuari;
+import com.example.demo.UseCases.ComentariUseCases;
 import com.example.demo.UseCases.ReservaUseCases;
 import com.example.demo.UseCases.RestaurantUseCases;
 import com.example.demo.UseCases.UsuariUseCases;
@@ -12,6 +13,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+
+import java.util.List;
 
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
@@ -25,6 +28,9 @@ public class DemoApplication implements CommandLineRunner {
 
     @Autowired
     private RestaurantUseCases restUseCases;
+
+    @Autowired
+    private ComentariUseCases cmtUseCases;
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
@@ -77,14 +83,35 @@ public class DemoApplication implements CommandLineRunner {
         restUseCases.insert(rest3);
         restUseCases.insert(rest4);
 
-        Reserva var = new Reserva.ReservaBuilder().usuari("Filtre").restaurant("Rest1").data_reserva("12/10/2019").comensals(8).build();
+
+        /*
+        Reserva var=new Reserva("Rest1","Filtre","2018-01-01",7,0,1);
         rsvUseCases.insert(var);
+        */
 
-        System.out.println("RESTAURANTS INSERITS");
+        //Reserva var2=new Reserva("Rest1","Filtre","2018-01-01",7,0,1);
+        //rsvUseCases.insert(var2);
+
+        //List<Reserva> p= rsvUseCases.capacitatReservada(var.getRestaurant(),var.getTorn(),var.getData_reserva());
+
+        //if(p.size()>1){
+          //  System.out.println("HOLAA");
+        //}
 
 
-        System.out.println("AQUI TENS TOTS ELS RESTAURANTS:");
-        restUseCases.findAll().forEach(System.out::println);
+
+        //Reserva a = rsvUseCases.findById(var.getId_reserva());
+
+        //System.out.println(a);
+
+
+        /*
+        Reserva var2 = new Reserva.ReservaBuilder().usuari("Filtre").restaurant("Rest1").data_reserva("12/12/2019").comensals(8).build();
+        rsvUseCases.insert(var2);
+        */
+
+
+
 
     }
 
