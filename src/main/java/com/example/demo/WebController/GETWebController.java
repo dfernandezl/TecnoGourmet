@@ -89,6 +89,11 @@ public class GETWebController {
         return "showReserva";
     }
 
+    @GetMapping("/showReserves/{nomRest}")
+    public String showReserves(@PathVariable String nomRest, Model model){
+        model.addAttribute("rsvList", this.rsvUseCases.findByRest(nomRest));
+        return "ReservesRest";
+    }
 
     //TODO: ACTUALITZAR/MODIFICAR RESERVA
 
@@ -107,6 +112,12 @@ public class GETWebController {
     public String login(Model model) {
         model.addAttribute("usr", new Usuari());
         return "IniciSessio";
+    }
+
+    @GetMapping("/loginRest")
+    public String loginRest(Model model) {
+        model.addAttribute("rst", new Restaurant());
+        return "IniciSessioRest";
     }
 
 

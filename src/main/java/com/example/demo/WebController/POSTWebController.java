@@ -17,6 +17,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+//import sun.rmi.runtime.Log;
 
 import javax.validation.Valid;
 
@@ -111,6 +112,19 @@ public class POSTWebController {
             LogIn login= new LogIn(usr.getUserName(),usr.getPassword());
             return "loginValidated";
         }
+    }
+
+    @PostMapping("/loginRest")
+    public String loginRest(@Valid @ModelAttribute("rst") Restaurant rst, Errors errors, Model model, RedirectAttributes redirectAttributes) {
+
+            LogIn restValidar = new LogIn(rst.getNomRestaurant(), rst.getPassword());
+
+            if(restUseCases.validateRestaurant(restValidar)==null){
+                return "loginNOValidated";
+            }else{
+                LogIn login = new LogIn(rst.getNomRestaurant(), rst.getPassword());
+                return "loginValidated";
+            }
     }
 
     @RequestMapping(value="/busqueda",method = RequestMethod.POST)

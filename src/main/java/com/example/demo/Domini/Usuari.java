@@ -91,12 +91,12 @@ public class Usuari {
         }
 
         public UsuariBuilder userName(String name) {
-            this.userName = name;
-            return this;
-        }
+                this.userName = name;
+                return this;
+            }
 
-        public UsuariBuilder password(String password) {
-            this.password = password;
+            public UsuariBuilder password(String password) {
+                this.password = password;
             return this;
         }
 

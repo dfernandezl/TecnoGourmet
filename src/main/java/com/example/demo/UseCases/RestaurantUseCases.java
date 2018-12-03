@@ -1,6 +1,7 @@
 package com.example.demo.UseCases;
 
 import com.example.demo.Domini.Restaurant;
+import com.example.demo.LogIn.LogIn;
 import com.example.demo.Persistence.RestaurantDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,13 +43,10 @@ public class RestaurantUseCases {
         return restDAO.findByPuntuacio(puntuacio);
     }
 
-
     public void puntuar(String nom, int puntuacio){
         restDAO.puntua(nom,puntuacio);
     }
 
-
-
-
+    public Restaurant validateRestaurant(LogIn login) {return restDAO.validateRestaurant(login);}
 
 }

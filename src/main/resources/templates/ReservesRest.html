@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mostrar reserves</title>
+    <link href="/styles.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<div id="registration-form">
+    <div class='fieldset'>
+        <legend>Mostrar reserves</legend>
+        <div align="center">  <img src="/logo.jpg" style="width:80%; height: 100%; margin-left: 5px; margin-top: 20px" class="w3-round"><br><br> </div>
+        <form action="/"  method="GET">
+            <table>
+                <th:block th:each="resv : ${rsvList}">
+                    <tr>
+                        <td><label >Id reserva</label>:</td>
+                        <td><label th:text="${resv.id_reserva}">...</label></td>
+                    </tr>
+                    <tr>
+                        <td><label >Nom usuari</label>:</td>
+                        <td><label th:text="${resv.userName}">...</label></td>
+                    </tr>
+                    <tr>
+                        <td><label >Data reserva</label>:</td>
+                        <td><label th:text="${resv.data_reserva}">...</label></td>
+                    </tr>
+                    <tr>
+                        <td><label >Comensals</label>:</td>
+                        <td><label th:text="${resv.comensals}">...</label></td>
+                    </tr>
+                    <tr>
+                        <td><label >Presentat</label>:</td>
+                        <td><label th:text="${resv.presentat}">...</label></td>
+                    </tr>
+                </th:block>
+            </table>
+            <input type="submit" value="Pàgina d'inici">
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>
