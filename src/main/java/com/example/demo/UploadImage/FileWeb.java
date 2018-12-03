@@ -1,18 +1,21 @@
 package com.example.demo.UploadImage;
 
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class FileWeb {
 
-    public static String handleFileUpload(@RequestParam("fichero") MultipartFile file){
-        String name = file.getOriginalFilename();
+    public static String handleFileUpload(@RequestParam("fichero") MultipartFile file, String name){
+    	System.out.println(name);
         if (!file.isEmpty()) {
             try {
                 byte[] bytes = file.getBytes();
