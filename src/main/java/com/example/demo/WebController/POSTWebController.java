@@ -9,6 +9,8 @@ import com.example.demo.UseCases.ReservaUseCases;
 import com.example.demo.UseCases.RestaurantUseCases;
 import com.example.demo.UseCases.UsuariUseCases;
 import com.example.demo.DisponibilitatReserva.ValidarReserva;
+
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -17,7 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.List;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 @Controller
@@ -40,7 +44,6 @@ public class POSTWebController {
 
         @PostMapping("/newUsu")
         public String createClassroom(@Valid @ModelAttribute("usr") Usuari usr, Errors errors, Model model, RedirectAttributes redirectAttributes) {
-
 
             if (errors.hasErrors()) {
                 model.addAttribute("usr", usr);
@@ -77,17 +80,20 @@ public class POSTWebController {
 
     @RequestMapping(value="/newRest", method=RequestMethod.POST, consumes = "multipart/form-data")
     public String handleFileUpload(@Valid @ModelAttribute("rest") Restaurant rest,@RequestParam("fichero") MultipartFile file, Errors errors, Model model, RedirectAttributes redirectAttributes) {
-
-        if (errors.hasErrors()) {
+    	String currentDate = new SimpleDateFormat("ssmmddMMyyyy").format(new Date());
+    	System.out.println(currentDate);
+    	String name=file.getOriginalFilename().replace(file.getOriginalFilename(), "im" + currentDate + "." + FilenameUtils.getExtension(file.getOriginalFilename()).toLowerCase());
+    	System.out.println(name);
+        
+    	if (errors.hasErrors()) {
             model.addAttribute("rest", rest);
             return "newRest";
         }
 
-
         model.addAttribute("name", rest.getNomRestaurant());
 
-        FileWeb.handleFileUpload(file);
-        rest.setFoto("/"+file.getOriginalFilename());
+        FileWeb.handleFileUpload(file,name);
+        rest.setFoto("/"+name);
         restUseCases.insert(rest);
         redirectAttributes.addAttribute("name", rest.getNomRestaurant());
         return "redirect:/showRest/{name}";
