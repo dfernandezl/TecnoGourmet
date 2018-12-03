@@ -95,6 +95,12 @@ public class GETWebController {
         return "ReservesRest";
     }
 
+    @GetMapping("/reservesUsu/{nomUsu}")
+    public String showReservesUsu(@PathVariable String nomUsu, Model model){
+        model.addAttribute("rsvListUsu", this.rsvUseCases.findByUsu(nomUsu));
+        return "ReservesUsu";
+    }
+
     //TODO: ACTUALITZAR/MODIFICAR RESERVA
 
 
