@@ -84,10 +84,10 @@ public class DemoApplication implements CommandLineRunner {
         restUseCases.insert(rest4);
 
 
-        /*
-        Reserva var=new Reserva("Rest1","Filtre","2018-01-01",7,0,1);
+
+        Reserva var=new Reserva(1235, "Filtre", "Rest1", "2018-01-03", 4, 0, 1);
         rsvUseCases.insert(var);
-        */
+
 
         //Reserva var2=new Reserva("Rest1","Filtre","2018-01-01",7,0,1);
         //rsvUseCases.insert(var2);
@@ -109,8 +109,6 @@ public class DemoApplication implements CommandLineRunner {
         Reserva var2 = new Reserva.ReservaBuilder().usuari("Filtre").restaurant("Rest1").data_reserva("12/12/2019").comensals(8).build();
         rsvUseCases.insert(var2);
         */
-
-
 
 
     }

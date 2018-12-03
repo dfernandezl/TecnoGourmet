@@ -3,6 +3,7 @@ package com.example.demo.Persistence;
 
 import com.example.demo.Domini.Restaurant;
 import com.example.demo.Domini.Usuari;
+import com.example.demo.LogIn.LogIn;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -87,10 +88,12 @@ public class RestaurantDAO {
 
         return jdbcTemplate.update(UPDATE,mitjana,aux.nVots+1,nom);
     }
+    public Restaurant validateRestaurant(LogIn logIn){
 
+        String sql = "select * from Restaurant where nom='" + logIn.getUsername() + "' and password='" + logIn.getPassword() + "'";
 
-
-
-
+        List<Restaurant> restaurants = jdbcTemplate.query(sql, mapper);
+        return restaurants.size() > 0 ? restaurants.get(0) : null;
+    }
 
 }
