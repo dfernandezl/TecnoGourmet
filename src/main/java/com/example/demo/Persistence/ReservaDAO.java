@@ -16,6 +16,7 @@ public class ReservaDAO {
 	 private final String INSERT = "insert into Reserva (id_reserva, username, restaurant,data_reserva, comensals, presentat) values(?,?,?, ?, ?, ?)";
 	 private final String SELECT_BY_ID = "SELECT * FROM Reserva WHERE id_reserva= ?";
 	 private final String UPDATE = "UPDATE Reserva SET data_reserva= ,comensals= ,presentat= ,  WHERE id_reserva= ";
+	 private final String SELECT_BY_REST = "SELECT * FROM Reserva WHERE restaurant= ?";
 
 
 	 private final RowMapper<Reserva> mapper = (resultSet, i) -> {
@@ -51,7 +52,10 @@ public class ReservaDAO {
 		return jdbcTemplate.queryForObject(SELECT_BY_ID, new Object[]{id} , mapper);
 	}
 
-
+	public List<Reserva> findByRest(String rest) {
+		//instead of using the rowMapper it uses the BeanPropertyRowMapper to fo it authomatically
+		return jdbcTemplate.query(SELECT_BY_REST, new Object[]{rest}, mapper);
+	}
 
 
 }

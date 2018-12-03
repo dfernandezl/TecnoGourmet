@@ -2,6 +2,7 @@ package com.example.demo.UseCases;
 
 
 import com.example.demo.Domini.Reserva;
+import com.example.demo.Domini.Restaurant;
 import com.example.demo.Domini.Usuari;
 import com.example.demo.Persistence.ReservaDAO;
 import com.example.demo.Persistence.UsuariDAO;
@@ -33,6 +34,8 @@ public class ReservaUseCases {
     }
 
     public Reserva findById(int id){return rsvDAO.findById(id);}
+
+    public List<Reserva> findByRest(String rest){return rsvDAO.findByRest(rest);}
 
 
 }

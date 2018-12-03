@@ -1,18 +1,49 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>show Reserva</title>
+    <meta charset="UTF-8">
+    <title>Informació reserva</title>
+    <link href="/styles.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<h1 th:text="'Reserva identified by ' + ${rsv.id_reserva} + ':'"/>
-<ul>
-    <li>
-        <div><span><b>Nom Usuari: </b></span><span th:text="${rsv.userName}"></span></div>
-        <div><span><b>Data: </b></span><span th:text="${rsv.data_reserva}"></span></div>
-        <div><span><b>Comensals: </b></span><span th:text="${rsv.comensals}"></span></div>
-        <div><span><b>Presentat: </b></span><span th:text="${rsv.presentat}"></span></div>
-    </li>
-</ul>
+
+<div id="registration-form">
+    <div class='fieldset'>
+        <legend>Reserva Confirmada - Informació</legend>
+        <div align="center">  <img src="/logo.jpg" style="width:80%; height: 100%; margin-left: 5px; margin-top: 20px" class="w3-round"><br><br> </div>
+        <form action="/"  method="GET">
+            <table>
+                <tr>
+                    <td><label >Nom d'usuari</label>:</td>
+                    <td><label th:text="${rsv.userName}">...</label></td>
+                </tr>
+                <tr>
+                    <td><label >Restaurant</label>:</td>
+                    <td><label th:text="${rsv.restaurant}">...</label></td>
+                </tr>
+                <tr>
+                    <td><label >Id reserva</label>:</td>
+                    <td><label th:text="${rsv.id_reserva}">...</label></td>
+                </tr>
+                <tr>
+                    <td><label >Data reserva</label>:</td>
+                    <td><label th:text="${rsv.data_reserva}">...</label></td>
+                </tr>
+                <tr>
+                    <td><label >Comensals</label>:</td>
+                    <td><label th:text="${rsv.comensals}">...</label></td>
+                </tr>
+                <tr>
+                    <td><label >Presentat</label>:</td>
+                    <td><label th:text="${rsv.presentat}">...</label></td>
+                </tr>
+            </table>
+            <input type="submit" value="Pàgina d'inici">
+        </form>
+    </div>
+</div>
+
+
 </body>
 </html>

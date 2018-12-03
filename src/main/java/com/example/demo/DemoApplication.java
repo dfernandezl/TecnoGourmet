@@ -80,6 +80,9 @@ public class DemoApplication implements CommandLineRunner {
         Reserva var = new Reserva.ReservaBuilder().usuari("Filtre").restaurant("Rest1").data_reserva("12/10/2019").comensals(8).build();
         rsvUseCases.insert(var);
 
+        Reserva var2 = new Reserva.ReservaBuilder().usuari("Prova2").restaurant("Rest1").data_reserva("15/9/2020").comensals(4).build();
+        rsvUseCases.insert(var2);
+
         System.out.println("RESTAURANTS INSERITS");
 
 
