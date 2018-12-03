@@ -4,9 +4,13 @@ import com.example.demo.Domini.*;
 import com.example.demo.FiltreIndex.Filtre;
 import com.example.demo.LogIn.LogIn;
 import com.example.demo.UploadImage.FileWeb;
+import com.example.demo.UseCases.ComentariUseCases;
 import com.example.demo.UseCases.ReservaUseCases;
 import com.example.demo.UseCases.RestaurantUseCases;
 import com.example.demo.UseCases.UsuariUseCases;
+import com.example.demo.DisponibilitatReserva.ValidarReserva;
+
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -16,7 +20,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 //import sun.rmi.runtime.Log;
 
 import javax.validation.Valid;
-import java.sql.SQLOutput;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 @Controller
 public class POSTWebController {
@@ -25,18 +32,19 @@ public class POSTWebController {
     private UsuariUseCases usuUseCases;
     private RestaurantUseCases restUseCases;
     private ReservaUseCases rsvUseCases;
+    private ComentariUseCases cmtUseCases;
 
 
-        public POSTWebController(UsuariUseCases usuUseCases, RestaurantUseCases rest,ReservaUseCases rsvUseCases) {
+        public POSTWebController(UsuariUseCases usuUseCases, RestaurantUseCases rest,ReservaUseCases rsvUseCases,ComentariUseCases cmtUseCases) {
             this.usuUseCases = usuUseCases;
             this.restUseCases = rest;
             this.rsvUseCases=rsvUseCases;
+            this.cmtUseCases=cmtUseCases;
         }
 
 
         @PostMapping("/newUsu")
         public String createClassroom(@Valid @ModelAttribute("usr") Usuari usr, Errors errors, Model model, RedirectAttributes redirectAttributes) {
-
 
             if (errors.hasErrors()) {
                 model.addAttribute("usr", usr);
@@ -53,38 +61,40 @@ public class POSTWebController {
             return "redirect:/showUser/{name}";
         }
 
+
     @PostMapping("/newResv")
-    public String createReservation(@Valid @ModelAttribute("rsv") Reserva rsv, Errors errors, Model model, RedirectAttributes redirectAttributes) {
+    public String createReservation(@Valid @ModelAttribute("rsv") Reserva rsv,@RequestParam("paramName") String nom,Model model, RedirectAttributes redirectAttributes) {
 
-        if (errors.hasErrors()) {
-            model.addAttribute("rsv", rsv);
-
-            return "newReserva";
+        rsv.setRestaurant(nom);
+        ValidarReserva var = new ValidarReserva(rsvUseCases, restUseCases);
+        if(var.dataValida(rsv.getData_reserva())) {
+            if (var.suficientCapacitat(rsv)) {
+                rsvUseCases.insert(rsv);
+                redirectAttributes.addAttribute("id_reserva", rsv.getId_reserva());
+                return "redirect:/showRsv/{id_reserva}";
+            }
+            return "showNOreserva";
         }
-
-        model.addAttribute("id_reserva", rsv.getId_reserva());
-
-        rsvUseCases.insert(rsv);
-
-        redirectAttributes.addAttribute("id_reserva", rsv.getId_reserva());
-
-        return "redirect:/showRsv/{id_reserva}";
+            return "ReservaNOvalida";
     }
 
 
     @RequestMapping(value="/newRest", method=RequestMethod.POST, consumes = "multipart/form-data")
     public String handleFileUpload(@Valid @ModelAttribute("rest") Restaurant rest,@RequestParam("fichero") MultipartFile file, Errors errors, Model model, RedirectAttributes redirectAttributes) {
-
-        if (errors.hasErrors()) {
+    	String currentDate = new SimpleDateFormat("ssmmddMMyyyy").format(new Date());
+    	System.out.println(currentDate);
+    	String name=file.getOriginalFilename().replace(file.getOriginalFilename(), "im" + currentDate + "." + FilenameUtils.getExtension(file.getOriginalFilename()).toLowerCase());
+    	System.out.println(name);
+        
+    	if (errors.hasErrors()) {
             model.addAttribute("rest", rest);
             return "newRest";
         }
 
-
         model.addAttribute("name", rest.getNomRestaurant());
 
-        FileWeb.handleFileUpload(file);
-        rest.setFoto("/"+file.getOriginalFilename());
+        FileWeb.handleFileUpload(file,name);
+        rest.setFoto("/"+name);
         restUseCases.insert(rest);
         redirectAttributes.addAttribute("name", rest.getNomRestaurant());
         return "redirect:/showRest/{name}";
@@ -150,6 +160,26 @@ public class POSTWebController {
         redirectAttributes.addAttribute("name",nom);
         return "redirect:/showRest/{name}";
     }
+
+
+    @PostMapping("/comentari")
+    public String comentari(@Valid @ModelAttribute("coment") Comentari com,@RequestParam(value="nomRest", required=true) String nomRest, Model model,RedirectAttributes redirectAttributes) {
+
+       com.setRestaurant(nomRest);
+       this.cmtUseCases.insert(com);
+
+       /*
+       List<Comentari> aux= this.cmtUseCases.findByRestaurant("Rest4");
+       if(aux.size()==1){
+           System.out.println("te un comentari");
+       }
+       */
+        redirectAttributes.addAttribute("name",nomRest);
+        return "redirect:/showRest/{name}";
+    }
+
+
+
 
 
 }

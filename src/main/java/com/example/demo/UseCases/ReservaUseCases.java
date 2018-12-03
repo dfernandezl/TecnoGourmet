@@ -36,6 +36,8 @@ public class ReservaUseCases {
     public Reserva findById(int id){return rsvDAO.findById(id);}
 
     public List<Reserva> findByRest(String rest){return rsvDAO.findByRest(rest);}
-
-
+  
+    public List<Reserva> capacitatReservada(String nom,int torn,String data){
+        return rsvDAO.capacitatReservada(nom,torn,data);
+    }
 }
