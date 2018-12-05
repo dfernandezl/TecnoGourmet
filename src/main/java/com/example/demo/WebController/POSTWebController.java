@@ -85,10 +85,10 @@ public class POSTWebController {
 
     @RequestMapping(value="/newRest", method=RequestMethod.POST, consumes = "multipart/form-data")
     public String handleFileUpload(@Valid @ModelAttribute("rest") Restaurant rest,@RequestParam("fichero") MultipartFile file, Errors errors, Model model, RedirectAttributes redirectAttributes) {
-    	String currentDate = new SimpleDateFormat("ssmmddMMyyyy").format(new Date());
-    	System.out.println(currentDate);
+
+            String currentDate = new SimpleDateFormat("ssmmddMMyyyy").format(new Date());
     	String name=file.getOriginalFilename().replace(file.getOriginalFilename(), "im" + currentDate + "." + FilenameUtils.getExtension(file.getOriginalFilename()).toLowerCase());
-    	System.out.println(name);
+
         
     	if (errors.hasErrors()) {
             model.addAttribute("rest", rest);
@@ -100,8 +100,10 @@ public class POSTWebController {
         FileWeb.handleFileUpload(file,name);
         rest.setFoto("/"+name);
         restUseCases.insert(rest);
-        redirectAttributes.addAttribute("name", rest.getNomRestaurant());
-        return "redirect:/showRest/{name}";
+        return "RestaurantCreated";
+        //redirectAttributes.addAttribute("name", rest.getNomRestaurant());
+        //return "redirect:/showRest/{name}";
+
     }
 
 
