@@ -27,6 +27,10 @@ public class Usuari {
 
     }
 
+    public Usuari(String nom){
+        this.userName=nom;
+    }
+
     public Usuari(UsuariBuilder ub){
 
         this.userName=ub.userName;
@@ -91,12 +95,12 @@ public class Usuari {
         }
 
         public UsuariBuilder userName(String name) {
-            this.userName = name;
-            return this;
-        }
+                this.userName = name;
+                return this;
+            }
 
-        public UsuariBuilder password(String password) {
-            this.password = password;
+            public UsuariBuilder password(String password) {
+                this.password = password;
             return this;
         }
 

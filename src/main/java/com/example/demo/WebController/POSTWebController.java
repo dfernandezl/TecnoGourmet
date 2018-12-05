@@ -16,6 +16,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+//import sun.rmi.runtime.Log;
 
 import javax.validation.Valid;
 
@@ -61,28 +62,32 @@ public class POSTWebController {
 
 
     @PostMapping("/newResv")
-    public String createReservation(@Valid @ModelAttribute("rsv") Reserva rsv,@RequestParam("paramName") String nom,Model model, RedirectAttributes redirectAttributes) {
+    public String createReservation(@Valid @ModelAttribute("rsv") Reserva rsv,@RequestParam("paramName") String nom,@RequestParam("usuari") String usuari,Model model, RedirectAttributes redirectAttributes) {
 
+        rsv.setUserName(usuari);
         rsv.setRestaurant(nom);
         ValidarReserva var = new ValidarReserva(rsvUseCases, restUseCases);
         if(var.dataValida(rsv.getData_reserva())) {
             if (var.suficientCapacitat(rsv)) {
                 rsvUseCases.insert(rsv);
                 redirectAttributes.addAttribute("id_reserva", rsv.getId_reserva());
-                return "redirect:/showRsv/{id_reserva}";
+                redirectAttributes.addAttribute("usuari",usuari);
+                return "redirect:/showRsv/{id_reserva}/{usuari}";
             }
+            model.addAttribute("usr",new Usuari(usuari));
             return "showNOreserva";
         }
+            model.addAttribute("usr",new Usuari(usuari));
             return "ReservaNOvalida";
     }
 
 
     @RequestMapping(value="/newRest", method=RequestMethod.POST, consumes = "multipart/form-data")
     public String handleFileUpload(@Valid @ModelAttribute("rest") Restaurant rest,@RequestParam("fichero") MultipartFile file, Errors errors, Model model, RedirectAttributes redirectAttributes) {
-    	String currentDate = new SimpleDateFormat("ssmmddMMyyyy").format(new Date());
-    	System.out.println(currentDate);
+
+            String currentDate = new SimpleDateFormat("ssmmddMMyyyy").format(new Date());
     	String name=file.getOriginalFilename().replace(file.getOriginalFilename(), "im" + currentDate + "." + FilenameUtils.getExtension(file.getOriginalFilename()).toLowerCase());
-    	System.out.println(name);
+
         
     	if (errors.hasErrors()) {
             model.addAttribute("rest", rest);
@@ -94,8 +99,10 @@ public class POSTWebController {
         FileWeb.handleFileUpload(file,name);
         rest.setFoto("/"+name);
         restUseCases.insert(rest);
-        redirectAttributes.addAttribute("name", rest.getNomRestaurant());
-        return "redirect:/showRest/{name}";
+        return "RestaurantCreated";
+        //redirectAttributes.addAttribute("name", rest.getNomRestaurant());
+        //return "redirect:/showRest/{name}";
+
     }
 
 
@@ -108,12 +115,26 @@ public class POSTWebController {
             return "loginNOValidated";
         }else{
             LogIn login= new LogIn(usr.getUserName(),usr.getPassword());
+            model.addAttribute("usr",usr.getUserName());
             return "loginValidated";
         }
     }
 
+    @PostMapping("/loginRest")
+    public String loginRest(@Valid @ModelAttribute("rst") Restaurant rst, Errors errors, Model model, RedirectAttributes redirectAttributes) {
+
+            LogIn restValidar = new LogIn(rst.getNomRestaurant(), rst.getPassword());
+
+            if(restUseCases.validateRestaurant(restValidar)==null){
+                return "loginNOValidated";
+            }else{
+                LogIn login = new LogIn(rst.getNomRestaurant(), rst.getPassword());
+                return "loginValidated";
+            }
+    }
+
     @RequestMapping(value="/busqueda",method = RequestMethod.POST)
-    public String busqueda(@Valid @ModelAttribute("p") Filtre p, Errors errors, Model model, RedirectAttributes redirectAttributes) {
+    public String busqueda(@Valid @ModelAttribute("p") Filtre p,@RequestParam("nom") String nomU,Errors errors, Model model, RedirectAttributes redirectAttributes) {
 
        switch(p.getOpcio()){
 
@@ -121,46 +142,49 @@ public class POSTWebController {
                try{
                    double valor=Double.parseDouble(p.getValor());
                    redirectAttributes.addAttribute("valor", valor);
-                   return "redirect:/puntuacio/{valor}";
+                   redirectAttributes.addAttribute("usuari", nomU);
+                   return "redirect:/puntuacio/{valor}/{usuari}";
                }catch(NumberFormatException ex){
-                    return "redirect:/";
+                   redirectAttributes.addAttribute("nom", nomU);
+                    return "redirect:/index/{nom}";
                }
 
            case "Ciutat":
                redirectAttributes.addAttribute("valor", p.getValor());
-               return "redirect:/ciutat/{valor}";
+               redirectAttributes.addAttribute("usuari",nomU);
+               return "redirect:/ciutat/{valor}/{usuari}";
 
            case "Nom":
                redirectAttributes.addAttribute("valor", p.getValor());
-               return "redirect:/nom/{valor}";
+               redirectAttributes.addAttribute("usuari",nomU);
+               return "redirect:/nom/{valor}/{usuari}";
        }
         return "redirect:/";
     }
 
 
-    @PostMapping("puntuacio/{nom}")
-    public String puntuacio(@PathVariable String nom, @RequestParam(value="tentacles", required=true) int param1,Model model,RedirectAttributes redirectAttributes) {
+    @PostMapping("puntuacio/{nom}/{usuari}")
+    public String puntuacio(@PathVariable String nom,@PathVariable String usuari, @RequestParam(value="tentacles", required=true) int param1,Model model,RedirectAttributes redirectAttributes) {
 
         this.restUseCases.puntuar(nom,param1);
         redirectAttributes.addAttribute("name",nom);
-        return "redirect:/showRest/{name}";
+        redirectAttributes.addAttribute("nom",usuari);
+        return "redirect:/showRest/{name}/{nom}";
     }
 
 
     @PostMapping("/comentari")
-    public String comentari(@Valid @ModelAttribute("coment") Comentari com,@RequestParam(value="nomRest", required=true) String nomRest, Model model,RedirectAttributes redirectAttributes) {
+    public String comentari(@Valid @ModelAttribute("coment") Comentari com,@RequestParam(value="nomRest", required=true) String nomRest,@RequestParam(value="nomU", required=true) String nomU, Model model,RedirectAttributes redirectAttributes) {
+
 
        com.setRestaurant(nomRest);
+       com.setUsuari(nomU);
        this.cmtUseCases.insert(com);
 
-       /*
-       List<Comentari> aux= this.cmtUseCases.findByRestaurant("Rest4");
-       if(aux.size()==1){
-           System.out.println("te un comentari");
-       }
-       */
-        redirectAttributes.addAttribute("name",nomRest);
-        return "redirect:/showRest/{name}";
+
+       redirectAttributes.addAttribute("name",nomRest);
+        redirectAttributes.addAttribute("nom",nomU);
+       return "redirect:/showRest/{name}/{nom}";
     }
 
 

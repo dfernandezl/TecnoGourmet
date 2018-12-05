@@ -15,7 +15,9 @@ public class ReservaDAO {
 	 private final String FIND_ALL = "select * from Reserva";
 	 private final String INSERT = "insert into Reserva (id_reserva, username, restaurant,data_reserva, comensals, presentat, torn) values(?,?,?, ?, ?, ?, ?)";
 	 private final String SELECT_BY_ID = "SELECT * FROM Reserva WHERE id_reserva= ?";
-	 private final String UPDATE = "UPDATE Reserva SET data_reserva= ,comensals= ,presentat= , torn=  WHERE id_reserva= ";
+	 private final String UPDATE = "UPDATE Reserva SET data_reserva= ,comensals= ,presentat= ,  WHERE id_reserva= ";
+	 private final String SELECT_BY_REST = "SELECT * FROM Reserva WHERE restaurant= ?";
+	 private final String SELECT_BY_USU = "SELECT * FROM Reserva WHERE userName= ?";
 
 	 private final String GET_Comensals = "SELECT * from Reserva where restaurant= ? AND data_reserva= ? AND torn= ?";
 
@@ -56,10 +58,18 @@ public class ReservaDAO {
 		return a;
 	}
 
+	public List<Reserva> findByRest(String rest) {
+		//instead of using the rowMapper it uses the BeanPropertyRowMapper to fo it authomatically
+		return jdbcTemplate.query(SELECT_BY_REST, new Object[]{rest}, mapper);
+	}
+
+	public List<Reserva> findByUsu(String usu){
+		return jdbcTemplate.query(SELECT_BY_USU, new Object[]{usu}, mapper);
+	}
+
 	public List<Reserva> capacitatReservada(String nom,int torn,String data){
 		return jdbcTemplate.query(GET_Comensals,new Object[]{nom,data,torn},mapper);
 	}
-
 
 
 }

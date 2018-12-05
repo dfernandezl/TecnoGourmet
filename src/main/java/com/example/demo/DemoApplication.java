@@ -85,14 +85,11 @@ public class DemoApplication implements CommandLineRunner {
         restUseCases.insert(rest3);
         restUseCases.insert(rest4);
 
-        RestTemplate restTemplate = new RestTemplate();
-        WeatherWeb temps = restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?q=mataró&APPID=4b8f72e96311a02a4a1da7f3c0ea71cd", WeatherWeb.class);
-        System.out.println(temps);
-        
-        /*
-        Reserva var=new Reserva("Rest1","Filtre","2018-01-01",7,0,1);
+
+        Reserva var=new Reserva(1235, "Filtre", "Rest1", "2018-01-03", 4, 0, 1);
+
         rsvUseCases.insert(var);
-        */
+
 
         //Reserva var2=new Reserva("Rest1","Filtre","2018-01-01",7,0,1);
         //rsvUseCases.insert(var2);
@@ -114,8 +111,6 @@ public class DemoApplication implements CommandLineRunner {
         Reserva var2 = new Reserva.ReservaBuilder().usuari("Filtre").restaurant("Rest1").data_reserva("12/12/2019").comensals(8).build();
         rsvUseCases.insert(var2);
         */
-
-
 
 
     }
