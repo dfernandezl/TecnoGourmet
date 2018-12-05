@@ -105,8 +105,13 @@ public class GETWebController {
 
     @GetMapping("/reservesUsu/{nomUsu}")
     public String showReservesUsu(@PathVariable String nomUsu, Model model){
-        model.addAttribute("rsvListUsu", this.rsvUseCases.findByUsu(nomUsu));
-        return "ReservesUsu";
+        if(!nomUsu.equalsIgnoreCase("null")) {
+            model.addAttribute("rsvListUsu", this.rsvUseCases.findByUsu(nomUsu));
+            model.addAttribute("usr", new Usuari(nomUsu));
+            return "ReservesUsu";
+        }else{
+            return "redirect:/login";
+        }
     }
 
     //TODO: ACTUALITZAR/MODIFICAR RESERVA
@@ -172,6 +177,8 @@ public class GETWebController {
         model.addAttribute("usr",new Usuari(usuari));
         return "index";
     }
+
+
 
 
 }
