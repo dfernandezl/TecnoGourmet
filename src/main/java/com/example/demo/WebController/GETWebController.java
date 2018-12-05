@@ -6,11 +6,15 @@ import com.example.demo.UseCases.ComentariUseCases;
 import com.example.demo.UseCases.ReservaUseCases;
 import com.example.demo.UseCases.RestaurantUseCases;
 import com.example.demo.UseCases.UsuariUseCases;
+import com.example.demo.temps.WeatherWeb;
+
+
 import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -53,6 +57,10 @@ public class GETWebController {
         }
         model.addAttribute("coment",new Comentari());
         model.addAttribute("rest", rest);
+
+        RestTemplate restTemplate = new RestTemplate();
+        WeatherWeb temps = restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?q=mataró&APPID=4b8f72e96311a02a4a1da7f3c0ea71cd", WeatherWeb.class);
+        model.addAttribute("temp", temps.toString());
         model.addAttribute("usr",new Usuari(nom));
         return "showRestaurant";
     }
@@ -121,16 +129,11 @@ public class GETWebController {
     public String showIndex(Model model){
         model.addAttribute("restList",this.restUsesCases.findAll());
         model.addAttribute("p", new Filtre());
-        model.addAttribute("usr",new Usuari("null"));
-        return "index";
-    }
+        
+        RestTemplate restTemplate = new RestTemplate();
+        WeatherWeb temps = restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?q=mataró&APPID=4b8f72e96311a02a4a1da7f3c0ea71cd", WeatherWeb.class);
+        model.addAttribute("temp", temps.toString());
 
-    @GetMapping("/index/{nom}")
-    public String showIndex(@PathVariable String nom, Model model){
-
-        model.addAttribute("restList",this.restUsesCases.findAll());
-        model.addAttribute("p", new Filtre());
-        model.addAttribute("usr",new Usuari(nom));
         return "index";
     }
 
