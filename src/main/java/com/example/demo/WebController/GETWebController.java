@@ -6,10 +6,13 @@ import com.example.demo.UseCases.ComentariUseCases;
 import com.example.demo.UseCases.ReservaUseCases;
 import com.example.demo.UseCases.RestaurantUseCases;
 import com.example.demo.UseCases.UsuariUseCases;
+import com.example.demo.temps.WeatherWeb;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -48,6 +51,11 @@ public class GETWebController {
         }
         model.addAttribute("coment",new Comentari());
         model.addAttribute("rest", rest);
+        
+        RestTemplate restTemplate = new RestTemplate();
+        WeatherWeb temps = restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?q=mataró&APPID=4b8f72e96311a02a4a1da7f3c0ea71cd", WeatherWeb.class);
+        model.addAttribute("temp", temps.toString());
+        
         return "showRestaurant";
     }
 
@@ -97,6 +105,10 @@ public class GETWebController {
     public String showIndex(Model model){
         model.addAttribute("restList",this.restUsesCases.findAll());
         model.addAttribute("p", new Filtre());
+        
+        RestTemplate restTemplate = new RestTemplate();
+        WeatherWeb temps = restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?q=mataró&APPID=4b8f72e96311a02a4a1da7f3c0ea71cd", WeatherWeb.class);
+        model.addAttribute("temp", temps.toString());
         return "index";
     }
 

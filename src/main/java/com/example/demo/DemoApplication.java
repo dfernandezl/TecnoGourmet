@@ -1,20 +1,22 @@
 package com.example.demo;
 
-import com.example.demo.Domini.Reserva;
 import com.example.demo.Domini.Restaurant;
 import com.example.demo.Domini.Usuari;
 import com.example.demo.UseCases.ComentariUseCases;
 import com.example.demo.UseCases.ReservaUseCases;
 import com.example.demo.UseCases.RestaurantUseCases;
 import com.example.demo.UseCases.UsuariUseCases;
+import com.example.demo.temps.WeatherWeb;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.client.RestTemplate;
 
-import java.util.List;
 
 @SpringBootApplication
 public class DemoApplication implements CommandLineRunner {
@@ -35,11 +37,11 @@ public class DemoApplication implements CommandLineRunner {
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
     }
-
-
+    
     @Override
     public void run(String... strings) throws Exception {
     	//una prova simplement
+    	
 
         Usuari aux = new Usuari.UsuariBuilder().userName("Filtre").password("password").build();
         Usuari aux2 = new Usuari.UsuariBuilder().userName("Prova2").password("password").build();
@@ -83,7 +85,10 @@ public class DemoApplication implements CommandLineRunner {
         restUseCases.insert(rest3);
         restUseCases.insert(rest4);
 
-
+        RestTemplate restTemplate = new RestTemplate();
+        WeatherWeb temps = restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?q=mataró&APPID=4b8f72e96311a02a4a1da7f3c0ea71cd", WeatherWeb.class);
+        System.out.println(temps);
+        
         /*
         Reserva var=new Reserva("Rest1","Filtre","2018-01-01",7,0,1);
         rsvUseCases.insert(var);
