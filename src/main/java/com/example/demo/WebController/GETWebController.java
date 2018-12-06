@@ -42,8 +42,6 @@ public class GETWebController {
         return "newRestaurant";
     }
 
-    //TODO: UPDATE RESTAURANT
-
 
     @GetMapping("/showRest/{name}/{nom}")
     public String showRest(@PathVariable String name,@PathVariable String nom, Model model) {
@@ -78,15 +76,6 @@ public class GETWebController {
         model.addAttribute("usr", this.usuUseCases.findByName(name));
         return "UsuariCreated";
     }
-
-
-    //TODO: ACTUALITZAR USUARI
-
-
-    //Reserves
-
-
-    //TODO:CREAR-INSERIR RESERVA
 
     @GetMapping("/newReserva/{nom}/{usuari}")
     public String createReserva(@PathVariable String nom,@PathVariable String usuari,Model model) {
@@ -139,22 +128,24 @@ public class GETWebController {
 
 
 
+    @GetMapping("/logInRestaurant")
+    public String loginRest(Model model){
+        model.addAttribute("rst",new Restaurant());
+        return "IniciSessioRest";
+    }
 
+    @GetMapping("/showReservesR/{nom}")
+    public String showRsvRest(@PathVariable String nom, Model model){
+        model.addAttribute("rsvList",this.rsvUseCases.findByRest(nom));
+        return "ReservesRest";
+    }
 
-    //login
 
     @GetMapping("/login")
     public String login(Model model) {
         model.addAttribute("usr", new Usuari());
         return "IniciSessio";
     }
-
-    @GetMapping("/loginRest")
-    public String loginRest(Model model) {
-        model.addAttribute("rst", new Restaurant());
-        return "IniciSessioRest";
-    }
-
 
 
     @GetMapping("/puntuacio/{valor}/{usuari}")
@@ -180,8 +171,5 @@ public class GETWebController {
         model.addAttribute("usr",new Usuari(usuari));
         return "index";
     }
-
-
-
 
 }
