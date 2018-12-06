@@ -126,11 +126,15 @@ public class POSTWebController {
 
             LogIn restValidar = new LogIn(rst.getNomRestaurant(), rst.getPassword());
 
-            if(restUseCases.validateRestaurant(restValidar)==null){
-                return "loginNOValidated";
+            Restaurant var = restUseCases.validateRestaurant(restValidar);
+
+            if(var==null){
+
+                return "LogInRestNO";
+
             }else{
-                LogIn login = new LogIn(rst.getNomRestaurant(), rst.getPassword());
-                return "loginValidated";
+                redirectAttributes.addAttribute("nom", rst.getNomRestaurant());
+                return "redirect:/showReservesR/{nom}";
             }
     }
 

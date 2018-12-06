@@ -23,7 +23,7 @@ public class RestaurantDAO {
     private final String FIND_BY_POBLACIO = "select * from Restaurant where poblacio = ?";
     private final String FIND_BY_PUNTUACIO = "select * from Restaurant where puntuacio >= ? order by puntuacio";
 
-
+    private final String FIND_BY_NAME_PASSWORD = "SELECT * FROM Restaurant WHERE nom= ?  AND password= ?";
 
     private final String UPDATE = "update Restaurant set puntuacio = ?, nVots= ? where nom= ?";
 
@@ -90,9 +90,7 @@ public class RestaurantDAO {
     }
     public Restaurant validateRestaurant(LogIn logIn){
 
-        String sql = "select * from Restaurant where nom='" + logIn.getUsername() + "' and password='" + logIn.getPassword() + "'";
-
-        List<Restaurant> restaurants = jdbcTemplate.query(sql, mapper);
+        List<Restaurant> restaurants = jdbcTemplate.query(FIND_BY_NAME_PASSWORD,new Object[]{logIn.getUsername(),logIn.getPassword()}, mapper);
         return restaurants.size() > 0 ? restaurants.get(0) : null;
     }
 
