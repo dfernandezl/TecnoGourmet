@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.Domini.Reserva;
 import com.example.demo.Domini.Restaurant;
 import com.example.demo.Domini.Usuari;
 import com.example.demo.UseCases.ComentariUseCases;
