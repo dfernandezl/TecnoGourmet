@@ -23,13 +23,6 @@
             </ul>
         </div>
         <table>
-            <!--
-            <tr>
-                <td><label th:class="${#fields.hasErrors('userName')}? 'error'">Nom usuari</label>:</td>
-                <td><input type="text" th:field="*{userName}"
-                           th:class="${#fields.hasErrors('userName')}? 'error'"/></td>
-            </tr>
-            -->
             <tr>
                 <td><label th:class="${#fields.hasErrors('data_reserva')}? 'error'">Data Reserva</label>:</td>
                 <td><input type="date" th:field="*{data_reserva}"
@@ -44,7 +37,7 @@
             <tr>
                 <td><label th:class="${#fields.hasErrors('comensals')}? 'error'">Numero de comensals</label>:</td>
                 <td><input type="text" th:field="*{comensals}"
-                           th:class="${#fields.hasErrors('comensals')}? 'error'"/></td>
+                           th:class="${#fields.hasErrors('comensals')}? 'error'" required/></td>
             </tr>
         </table>
         <input type="submit" value="Reservar"/>

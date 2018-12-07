@@ -42,8 +42,6 @@ public class GETWebController {
         return "newRestaurant";
     }
 
-    //TODO: UPDATE RESTAURANT
-
 
     @GetMapping("/showRest/{name}/{nom}")
     public String showRest(@PathVariable String name,@PathVariable String nom, Model model) {
@@ -78,15 +76,6 @@ public class GETWebController {
         model.addAttribute("usr", this.usuUseCases.findByName(name));
         return "UsuariCreated";
     }
-
-
-    //TODO: ACTUALITZAR USUARI
-
-
-    //Reserves
-
-
-    //TODO:CREAR-INSERIR RESERVA
 
     @GetMapping("/newReserva/{nom}/{usuari}")
     public String createReserva(@PathVariable String nom,@PathVariable String usuari,Model model) {
@@ -129,7 +118,62 @@ public class GETWebController {
     public String showIndex(Model model){
         model.addAttribute("restList",this.restUsesCases.findAll());
         model.addAttribute("p", new Filtre());
-        
+        model.addAttribute("usr",new Usuari("null"));
+
+
+        RestTemplate restTemplate = new RestTemplate();
+        WeatherWeb temps = restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?q=mataró&APPID=4b8f72e96311a02a4a1da7f3c0ea71cd", WeatherWeb.class);
+        model.addAttribute("temp", temps.toString());
+
+        return "index";
+    }
+
+
+
+    @GetMapping("/logInRestaurant")
+    public String loginRest(Model model){
+        model.addAttribute("rst",new Restaurant());
+        return "IniciSessioRest";
+    }
+
+    @GetMapping("/showReservesR/{nom}")
+    public String showRsvRest(@PathVariable String nom, Model model){
+        model.addAttribute("rsvList",this.rsvUseCases.findByRest(nom));
+        return "ReservesRest";
+    }
+
+
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("usr", new Usuari());
+        return "IniciSessio";
+    }
+
+
+    @GetMapping("/puntuacio/{valor}/{usuari}")
+    public String showPuntuacio(@PathVariable double valor,@PathVariable String usuari,Model model){
+        model.addAttribute("restList",this.restUsesCases.findByPuntuacio(valor));
+        model.addAttribute("p", new Filtre());
+        model.addAttribute("usr",new Usuari(usuari));
+
+
+
+        RestTemplate restTemplate = new RestTemplate();
+        WeatherWeb temps = restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?q=mataró&APPID=4b8f72e96311a02a4a1da7f3c0ea71cd", WeatherWeb.class);
+        model.addAttribute("temp", temps.toString());
+
+
+        return "index";
+    }
+
+
+    @GetMapping("/index/{nom}")
+    public String showIndex(@PathVariable String nom, Model model){
+
+        model.addAttribute("restList",this.restUsesCases.findAll());
+        model.addAttribute("p", new Filtre());
+        model.addAttribute("usr",new Usuari(nom));
+
         RestTemplate restTemplate = new RestTemplate();
         WeatherWeb temps = restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?q=mataró&APPID=4b8f72e96311a02a4a1da7f3c0ea71cd", WeatherWeb.class);
         model.addAttribute("temp", temps.toString());
@@ -140,36 +184,18 @@ public class GETWebController {
 
 
 
-
-    //login
-
-    @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("usr", new Usuari());
-        return "IniciSessio";
-    }
-
-    @GetMapping("/loginRest")
-    public String loginRest(Model model) {
-        model.addAttribute("rst", new Restaurant());
-        return "IniciSessioRest";
-    }
-
-
-
-    @GetMapping("/puntuacio/{valor}/{usuari}")
-    public String showPuntuacio(@PathVariable double valor,@PathVariable String usuari,Model model){
-        model.addAttribute("restList",this.restUsesCases.findByPuntuacio(valor));
-        model.addAttribute("p", new Filtre());
-        model.addAttribute("usr",new Usuari(usuari));
-        return "index";
-    }
-
     @GetMapping("/nom/{valor}/{usuari}")
     public String showNom(@PathVariable String valor,@PathVariable String usuari,Model model){
         model.addAttribute("restList",this.restUsesCases.findByName(valor));
         model.addAttribute("p", new Filtre());
         model.addAttribute("usr",new Usuari(usuari));
+
+
+        RestTemplate restTemplate = new RestTemplate();
+        WeatherWeb temps = restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?q=mataró&APPID=4b8f72e96311a02a4a1da7f3c0ea71cd", WeatherWeb.class);
+        model.addAttribute("temp", temps.toString());
+
+
         return "index";
     }
 
@@ -178,10 +204,13 @@ public class GETWebController {
         model.addAttribute("restList",this.restUsesCases.findByPoblacio(valor));
         model.addAttribute("p", new Filtre());
         model.addAttribute("usr",new Usuari(usuari));
+
+
+        RestTemplate restTemplate = new RestTemplate();
+        WeatherWeb temps = restTemplate.getForObject("http://api.openweathermap.org/data/2.5/weather?q=mataró&APPID=4b8f72e96311a02a4a1da7f3c0ea71cd", WeatherWeb.class);
+        model.addAttribute("temp", temps.toString());
+
         return "index";
     }
-
-
-
 
 }
