@@ -27,6 +27,10 @@ public class Usuari {
 
     }
 
+    public Usuari(String nom){
+        this.userName=nom;
+    }
+
     public Usuari(UsuariBuilder ub){
 
         this.userName=ub.userName;

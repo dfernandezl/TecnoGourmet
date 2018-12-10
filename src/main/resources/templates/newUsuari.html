@@ -24,12 +24,12 @@
                 <tr>
                     <td><label th:class="${#fields.hasErrors('userName')}? 'error'">Nom d'usuari (mínim 3 caràcters)</label>:</td>
                     <td><input type="text" th:field="*{userName}"
-                               th:class="${#fields.hasErrors('userName')}? 'error'"/></td>
+                               th:class="${#fields.hasErrors('userName')}? 'error'" required/></td>
                 </tr>
                 <tr>
                     <td><label th:class="${#fields.hasErrors('password')}? 'error'">Contrassenya (mínim 3 caràcters)</label>:</td>
                     <td><input type="password" th:field="*{password}"
-                               th:class="${#fields.hasErrors('password')}? 'error'"/></td>
+                               th:class="${#fields.hasErrors('password')}? 'error'" required/></td>
                 </tr>
             </table>
             <input type="submit" value="Registrar-me">

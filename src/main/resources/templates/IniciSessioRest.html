@@ -15,11 +15,11 @@
             <table>
                 <tr>
                     <td><label>Nom restaurant</label>:</td>
-                    <td><input type="text" th:field="*{nomRestaurant}"/></td>
+                    <td><input type="text" th:field="*{nomRestaurant}" required/></td>
                 </tr>
                 <tr>
                     <td><label >Contrassenya</label>:</td>
-                    <td><input type="password" th:field="*{password}" /></td>
+                    <td><input type="password" th:field="*{password}" required/></td>
                 </tr>
             </table>
             <input type="submit" value="Validar"/>

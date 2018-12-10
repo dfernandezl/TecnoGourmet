@@ -24,40 +24,40 @@
             <tr>
                 <td><label th:class="${#fields.hasErrors('nomRestaurant')}? 'error'">Nom</label>:</td>
                 <td><input type="text" th:field="*{nomRestaurant}"
-                           th:class="${#fields.hasErrors('nomRestaurant')}? 'error'"/></td>
+                           th:class="${#fields.hasErrors('nomRestaurant')}? 'error'" required/></td>
             </tr>
 
             <tr>
                 <td><label th:class="${#fields.hasErrors('password')}? 'error'">Contrasenya</label>:</td>
                 <td><input type="password" th:field="*{password}"
-                           th:class="${#fields.hasErrors('password')}? 'error'"/></td>
+                           th:class="${#fields.hasErrors('password')}? 'error'" required/></td>
             </tr>
 
             <tr>
                 <td><label th:class="${#fields.hasErrors('direccio')}? 'error'">Direcció</label>:</td>
                 <td><input type="text" th:field="*{direccio}"
-                           th:class="${#fields.hasErrors('direccio')}? 'error'"/></td>
+                           th:class="${#fields.hasErrors('direccio')}? 'error'" required/></td>
             </tr>
             <tr>
                 <td><label th:class="${#fields.hasErrors('poblacio')}? 'error'">Població</label>:</td>
                 <td><input type="text" th:field="*{poblacio}"
-                           th:class="${#fields.hasErrors('poblacio')}? 'error'"/></td>
+                           th:class="${#fields.hasErrors('poblacio')}? 'error'" required/></td>
             </tr>
             <tr>
                 <td><label th:class="${#fields.hasErrors('numTelefon')}? 'error'">Telefon</label>:</td>
                 <td><input type="text" th:field="*{numTelefon}"
-                           th:class="${#fields.hasErrors('numTelefon')}? 'error'"/></td>
+                           th:class="${#fields.hasErrors('numTelefon')}? 'error'" required/></td>
             </tr>
             <tr>
                 <td><label th:class="${#fields.hasErrors('capacitat')}? 'error'">Capacitat</label>:</td>
                 <td><input type="text" th:field="*{capacitat}"
-                           th:class="${#fields.hasErrors('capacitat')}? 'error'"/></td>
+                           th:class="${#fields.hasErrors('capacitat')}? 'error'" required/></td>
             </tr>
 
             <tr>
                 <td><label th:class="${#fields.hasErrors('descripcio')}? 'error'">Descripció</label>:</td>
                 <td><textarea rows="10" cols="50" type="text" th:field="*{descripcio}"
-                           th:class="${#fields.hasErrors('descripcio')}? 'error'"/></td>
+                           th:class="${#fields.hasErrors('descripcio')}? 'error'" required/></td>
             </tr>
 
             <tr>

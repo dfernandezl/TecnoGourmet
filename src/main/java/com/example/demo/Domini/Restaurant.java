@@ -24,6 +24,7 @@ public class Restaurant {
 
     public  Restaurant(String nomRestaurant,String password,String direccio,String poblacio,Double puntuacio,String descripcio,long numTelefon,int capacitat,String foto, int nVots) {
         this.nomRestaurant = nomRestaurant;
+        this.password=password;
         this.direccio =direccio;
         this.poblacio = poblacio;
         this.puntuacio = puntuacio;
