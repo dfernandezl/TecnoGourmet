@@ -1,5 +1,6 @@
 package com.example.demo.Domini;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -101,4 +102,22 @@ public class Reserva {
 				", id de la reserva ='" + this.id_reserva + '\'' +
 				'}';
 	}
+
+	public static boolean dataValida(String datS){
+
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		String datA = dateFormat.format(date);
+
+		if(Integer.parseInt(datS.substring(0,4))>=Integer.parseInt(datA.substring(0,4))){
+			if(Integer.parseInt(datS.substring(5,7))>=Integer.parseInt(datA.substring(5,7))){
+				if(Integer.parseInt(datS.substring(8))>Integer.parseInt(datA.substring(8))){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+
 }

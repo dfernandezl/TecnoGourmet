@@ -13,6 +13,7 @@ import org.apache.catalina.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.client.RestTemplate;
 
@@ -78,7 +79,9 @@ public class GETWebController {
     }
 
     @GetMapping("/newReserva/{nom}/{usuari}")
-    public String createReserva(@PathVariable String nom,@PathVariable String usuari,Model model) {
+    public String createReserva(@PathVariable String nom, @PathVariable String usuari, Model model) {
+
+        Restaurant rest = restUsesCases.findByName(nom);
         model.addAttribute("nom",nom);
         model.addAttribute("rsv", new Reserva());
         model.addAttribute("usr",new Usuari(usuari));
@@ -111,9 +114,6 @@ public class GETWebController {
         }
     }
 
-    //TODO: ACTUALITZAR/MODIFICAR RESERVA
-
-
     @GetMapping("/")
     public String showIndex(Model model){
         model.addAttribute("restList",this.restUsesCases.findAll());
@@ -127,8 +127,6 @@ public class GETWebController {
 
         return "index";
     }
-
-
 
     @GetMapping("/logInRestaurant")
     public String loginRest(Model model){
