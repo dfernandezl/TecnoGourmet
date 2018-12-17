@@ -1,6 +1,6 @@
 # TecnoGoumet
 
-TecnoGourmet es una web orientada a facilitar la recerca de restaurant i la reserva de taules. Aquesta iniciativa neix de Joan Figueres, David Gernandez i David Volart com a projecte a l'assignatura 'Laboratòri d'aplicacions web'.
+TecnoGourmet es una web orientada a facilitar la recerca de restaurant i la reserva de taules. Aquesta iniciativa neix de Joan Figueres, David Gernandez i David Volart com a projecte a l'assignatura 'Laboratòri d'aplicacions web ' .
 
 La nostra aplicació de cara al usuari permet:
 
