@@ -8,7 +8,6 @@ import com.example.demo.UseCases.ComentariUseCases;
 import com.example.demo.UseCases.ReservaUseCases;
 import com.example.demo.UseCases.RestaurantUseCases;
 import com.example.demo.UseCases.UsuariUseCases;
-import com.example.demo.DisponibilitatReserva.ValidarReserva;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,13 +61,15 @@ public class POSTWebController {
 
 
     @PostMapping("/newResv")
-    public String createReservation(@Valid @ModelAttribute("rsv") Reserva rsv,@RequestParam("paramName") String nom,@RequestParam("usuari") String usuari,Model model, RedirectAttributes redirectAttributes) {
+    public String createReservation(@Valid @ModelAttribute("rsv") Reserva rsv,@RequestParam("paramName") String nom,@RequestParam("usuari") String usuari, Model model, RedirectAttributes redirectAttributes) {
 
         rsv.setUserName(usuari);
         rsv.setRestaurant(nom);
-        ValidarReserva var = new ValidarReserva(rsvUseCases, restUseCases);
-        if(var.dataValida(rsv.getData_reserva())) {
-            if (var.suficientCapacitat(rsv)) {
+        Restaurant rest = restUseCases.findByName(nom);
+
+        if(rsv.dataValida(rsv.getData_reserva())) {
+            if (rest.suficientCapacitat(rsv)) {
+                rest.inserirReserva(rsv);
                 rsvUseCases.insert(rsv);
                 redirectAttributes.addAttribute("id_reserva", rsv.getId_reserva());
                 redirectAttributes.addAttribute("usuari",usuari);
@@ -79,6 +80,7 @@ public class POSTWebController {
         }
             model.addAttribute("usr",new Usuari(usuari));
             return "ReservaNOvalida";
+
     }
 
 
