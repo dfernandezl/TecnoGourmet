@@ -19,6 +19,10 @@ public class Usuari {
     private int punts;
 
 
+
+
+    
+
     @NotNull
     private int reserves_no_presentades;
 
