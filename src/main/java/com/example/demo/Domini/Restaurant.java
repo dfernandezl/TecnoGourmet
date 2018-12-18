@@ -1,8 +1,10 @@
 package com.example.demo.Domini;
 
 import javax.validation.constraints.NotNull;
-import java.awt.*;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class Restaurant {
 
@@ -16,6 +18,9 @@ public class Restaurant {
     public  int capacitat;
     public int nVots;
     public  String foto;
+
+
+    private List<Reserva> reserves;
 
 
     public Restaurant(){
@@ -33,6 +38,7 @@ public class Restaurant {
         this.capacitat= capacitat;
         this.foto=foto;
         this.nVots=nVots;
+        this.reserves= new ArrayList<Reserva>();
     }
 
     public int getnVots(){
@@ -118,5 +124,22 @@ public class Restaurant {
         return "nom: "+this.nomRestaurant+", direcció: "+this.direccio+" capcitat:"+this.capacitat+", poblacio: "+ this.poblacio+", puntuacio: "+this.puntuacio+",descripcio: "+this.descripcio+", telefon: "+numTelefon+", foto:"+this.foto+",nVots:"+nVots;
     }
 
+    public void inserirReserva(Reserva rsv){
+        reserves.add(rsv);
+    }
+
+    public boolean suficientCapacitat(Reserva rsv){
+
+        int capacitatsOcupades=0;
+
+        for (Iterator<Reserva> i = reserves.iterator(); i.hasNext();) {
+            Reserva item = i.next();
+            capacitatsOcupades+=item.getComensals();
+        }
+
+        int aux=capacitatsOcupades+rsv.getComensals();
+
+        return aux<= this.capacitat;
+    }
 
 }
