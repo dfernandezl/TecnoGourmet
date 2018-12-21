@@ -109,15 +109,24 @@ public class Reserva {
 		Date date = new Date();
 		String datA = dateFormat.format(date);
 
-		if(Integer.parseInt(datS.substring(0,4))>=Integer.parseInt(datA.substring(0,4))){
-			if(Integer.parseInt(datS.substring(5,7))>=Integer.parseInt(datA.substring(5,7))){
-				if(Integer.parseInt(datS.substring(8))>Integer.parseInt(datA.substring(8))){
-					return true;
+		if(Integer.parseInt(datS.substring(0,4))>Integer.parseInt(datA.substring(0,4))) {
+			return true;
+		}else{
+				if(Integer.parseInt(datS.substring(0,4))==Integer.parseInt(datA.substring(0,4))){
+					if(Integer.parseInt(datS.substring(5,7))>Integer.parseInt(datA.substring(5,7))){
+						return true;
+					}else{
+						if(Integer.parseInt(datS.substring(5,7))==Integer.parseInt(datA.substring(5,7))){
+							if(Integer.parseInt(datS.substring(8))>Integer.parseInt(datA.substring(8))){
+								return true;
+							}
+						}
+					}
 				}
-			}
 		}
-		return false;
+			return false;
+		}
 	}
 
 
-}
+
