@@ -46,4 +46,4 @@ Com a propietari d'un restaurant pots veure les reserves que han fet.
 
 
 
-Link web: http://83.57.8.238:8080/ (És un servidor personal) 
+Link web: http://83.52.163.75:8080/ (És un servidor personal) 
